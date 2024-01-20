@@ -138,6 +138,36 @@ function M.config()
 					},
 				})
 			end,
+			tailwindcss = function()
+				lspconfig.tailwindcss.setup({
+					settings = {
+						tailwindCSS = {
+							validate = true,
+							experimental = {
+								classRegex = {
+									-- Custom class name attributes (e.g. buttonClassName)
+									{ [==[[a-zA-Z]*ClassName=["'`]([^"'`]+)["'`]]==] },
+									-- cls, clsx
+									-- https://github.com/tailwindlabs/tailwindcss-intellisense/issues/682#issuecomment-1364585313
+									{
+										[[clsx\(([^)(]*(?:\([^)(]*(?:\([^)(]*(?:\([^)(]*\)[^)(]*)*\)[^)(]*)*\)[^)(]*)*)\)]],
+										'"(.*?)"',
+									},
+									-- Tailwind Variants
+									-- https://www.tailwind-variants.org/docs/getting-started#intellisense-setup-optional
+									{
+										[[tv\(([^)(]*(?:\([^)(]*(?:\([^)(]*(?:\([^)(]*\)[^)(]*)*\)[^)(]*)*\)[^)(]*)*)\)]],
+										'"(.*?)"',
+									},
+									-- `styles` objects
+									-- https://github.com/tailwindlabs/tailwindcss-intellisense/issues/682#issuecomment-1364585313
+									{ [[styles =([^}]*)\}]], [==[["'`]([^"'`]*).*?["'`]]==] },
+								},
+							},
+						},
+					},
+				})
+			end,
 		},
 	})
 
