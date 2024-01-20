@@ -46,7 +46,7 @@ vim.opt.cursorline = true  -- highlight the current line
 vim.opt.splitright = true  -- Force all Vertical split to the right
 vim.opt.splitbelow = true  -- Force all Horizontal split to the bottom
 
-vim.opt.colorcolumn = '91' -- Line lenght marker at 80 columns
+vim.opt.colorcolumn = '100' -- Line lenght marker at 100 columns
 vim.opt.laststatus = 0     -- Set global statusline
 
 vim.opt.timeout = true
@@ -80,7 +80,7 @@ vim.opt.ignorecase = true         -- ignore case in search patterns
 vim.opt.spelllang = { "en" }
 vim.opt.foldmethod = 'marker'     -- Enable folding (default 'foldmarker')
 vim.opt.fileencoding = "utf-8"    -- the encoding written to a file
-vim.opt.linebreak = true          -- Wrap on word boundary
+-- vim.opt.linebreak = true          -- Wrap on word boundary
 
 -----------------------------------------------------------
 -- Buckup, Undo
@@ -88,10 +88,10 @@ vim.opt.linebreak = true          -- Wrap on word boundary
 -- vim.opt.swapfile = false    -- creates a swapfile
 vim.opt.undofile = true     -- enable persistent undo
 vim.opt.undolevels = 1000
-vim.opt.backup = false      -- creates a backup file
-vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
+-- vim.opt.backup = false      -- creates a backup file
+-- vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 vim.opt.updatetime = 200    -- Save swap file and trigger CursorHold
-vim.opt.conceallevel = 0    -- so that `` is visible in markdown files
+vim.opt.conceallevel = 3    -- so that `` is visible in markdown files
 -- vim.opt.undodir = os.getenv("HOME") .. "./nvim/undodir"
 
 -----------------------------------------------------------
