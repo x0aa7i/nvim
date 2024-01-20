@@ -1,35 +1,6 @@
--- local M = {
---   "jose-elias-alvarez/null-ls.nvim",
---   event = "BufReadPre",
---   dependencies = {
---     "nvim-lua/plenary.nvim",
---   },
--- }
-
--- function M.config()
---   local null_ls = require "null-ls"
---   -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
---   local formatting = null_ls.builtins.formatting
---   -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
---   local diagnostics = null_ls.builtins.diagnostics
-
---   -- https://github.com/prettier-solidity/prettier-plugin-solidity
---   null_ls.setup {
---     debug = false,
---     sources = {
---       formatting.prettierd.with {
---         extra_filetypes = { "svelte", "toml" },
---         extra_args = { "--no-semi" },
---       },
---       formatting.black.with { extra_args = { "--fast" } },
---       formatting.stylua,
---       diagnostics.flake8,
---     },
---   }
--- end
-
 local M = {
 	"stevearc/conform.nvim",
+	event = "LspAttach",
 	opts = {},
 }
 
@@ -38,10 +9,7 @@ M.config = function()
 	local prettier = "prettierd"
 
 	conform.setup({
-		format_on_save = {
-			timeout_ms = 3000,
-			lsp_fallback = true,
-		},
+		quiet = true,
 		formatters_by_ft = {
 			javascript = { prettier },
 			typescript = { prettier },
@@ -58,6 +26,23 @@ M.config = function()
 			lua = { "stylua" },
 
 			python = { "isort", "black" },
+		},
+
+		-- format_on_save = {
+		-- 	timeout_ms = 3000,
+		-- 	lsp_fallback = true,
+		-- },
+		format_on_save = function(bufnr)
+			-- Disable autoformat for files in a certain path
+			local bufname = vim.api.nvim_buf_get_name(bufnr)
+			if bufname:match("/node_modules/") then
+				return
+			end
+
+			return { timeout_ms = 500, lsp_fallback = true, async = true }
+		end,
+		format_after_save = {
+			lsp_fallback = true,
 		},
 	})
 
