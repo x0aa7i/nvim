@@ -81,10 +81,31 @@ function M.config()
 			"svelte",
 			"lua_ls",
 			"emmet_ls",
+			"jsonls",
 			"pyright",
 		},
 		handlers = {
 			default_setup,
+			svelte = function()
+				lspconfig.svelte.setup({
+					-- fix for svelte-language-server watcher change detection
+					on_attach = function(client, bufnr)
+						if client.name == "svelte" or vim.bo[bufnr].filetype == "svelte" then
+							vim.api.nvim_create_autocmd("BufWritePost", {
+								pattern = { "*.js", "*.ts", "*.svelte" },
+								callback = function(ctx)
+									client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.file })
+								end,
+							})
+						end
+					end,
+					settings = {
+						svelte = {
+							validate = true,
+						},
+					},
+				})
+			end,
 			lua_ls = function()
 				lspconfig.lua_ls.setup({
 					settings = {
