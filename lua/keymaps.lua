@@ -143,9 +143,6 @@ map("v", ">", ">gv")
 -- Terminal
 map("t", "<C-\\>", "<C-\\><C-n>")
 
--- change all accurance of word under cursor
-map("n", "<leader>C", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Change word under cursor" })
-
 -- inset empty blank line above/below
 map("n", "<leader>o", "m`o<esc>``", { desc = "Insert blank line above" })
 map("n", "<leader>O", "m`O<esc>``", { desc = "Insert blank line below" })

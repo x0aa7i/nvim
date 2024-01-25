@@ -21,9 +21,6 @@ return {
 				end
 
 				-- Navigation
-				map("n", "]gh", "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true })
-				map("n", "[gh", "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true })
-
 				map("n", "]h", gs.next_hunk, "Next Hunk")
 				map("n", "[h", gs.prev_hunk, "Prev Hunk")
 
