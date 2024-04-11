@@ -2,13 +2,24 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
-      diagnostics = {
-        signs = false,
+      -- diagnostics = {
+      --   signs = false,
+      -- },
+      flags = {
+        debounce_text_changes = 200,
+        allow_incremental_sync = true,
       },
       servers = {
-        -- pyright will be automatically installed with mason and loaded with lspconfig
         ----@type lspconfig.options.svelte
-        svelte = {},
+        svelte = {
+          capabilities = {
+            workspace = {
+              didChangeWatchedFiles = {
+                dynamicRegistration = true,
+              },
+            },
+          },
+        },
         ----@type lspconfig.options.tailwindcss
         tailwindcss = {
           settings = {
@@ -40,9 +51,6 @@ return {
       },
       -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig
-      setup = {
-        -- example to setup with typescript.nvim
-      },
     },
   },
   {
