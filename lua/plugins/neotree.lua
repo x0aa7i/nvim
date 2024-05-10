@@ -24,6 +24,7 @@ return {
       },
       commands = {
         -- overwrite default 'delete' command to 'trash'.
+        -- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/202
         delete = function(state)
           local inputs = require("neo-tree.ui.inputs")
           local path = state.tree:get_node().path

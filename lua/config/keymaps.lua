@@ -32,13 +32,19 @@ map({ "i", "n", "v" }, "<C-a>", "<esc>ggVG")
 map("n", "<S-l>", "$")
 map("n", "<S-h>", "^")
 
+-- Delete word with backspace
+map("i", "<C-BS>", "<C-w>")
+
 map("n", "<cr>", "ciw", { desc = "Change word under cursor" })
 map("n", "gl", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 
--- local Util = require("lazyvim.util")
+local Util = require("lazyvim.util")
 -- local unmap = vim.keymap.del
 
--- unmap("n", "<C-/>")
--- map("n", "<C-/>", function()
---   Util.terminal(nil, { border = "rounded", size = { width = 0.5, height = 0.5 } })
--- end, { desc = "Term with border" })
+if not vim.g.vscode then
+  map("n", "<C-\\>", function()
+    Util.terminal(nil, { cwd = Util.root() })
+  end, { desc = "Terminal (root dir)" })
+
+  map("t", "<C-\\>", "<cmd>close<cr>", { desc = "Hide Terminal" })
+end

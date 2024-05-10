@@ -3,3 +3,4 @@
 -- Add any additional options here
 
 -- vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
+vim.opt.linebreak = true

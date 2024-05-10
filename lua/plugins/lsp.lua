@@ -85,6 +85,7 @@ return {
       },
       ensure_installed = {
         "stylua",
+        "eslint_d",
         "prettierd",
         "svelte-language-server",
         "tailwindcss-language-server",

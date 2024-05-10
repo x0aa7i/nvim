@@ -8,6 +8,7 @@ return {
       on_colors = function(colors)
         -- colors.bg_dark = "#101317"
         -- colors.bg = "#1a1b26"
+        -- colors.bg = "#16161e"
         -- colors.bg_highlight = "#212231"
         -- colors.bg_light = "#2a2d3f"
         -- colors.terminal_black = "#414868"
