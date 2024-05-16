@@ -58,7 +58,7 @@ return {
               return
             end
             for _, node in ipairs(selected_nodes) do
-              vim.fn.system({ "trash", vim.fn.fnameescape(node.path) })
+              vim.fn.system({ "trash-put", vim.fn.fnameescape(node.path) })
             end
             require("neo-tree.sources.manager").refresh(state.name)
           end)
