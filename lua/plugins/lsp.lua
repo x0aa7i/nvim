@@ -89,6 +89,16 @@ return {
         "prettierd",
         "svelte-language-server",
         "tailwindcss-language-server",
+        "css-lsp",
+        "json-lsp",
+        "stylelint-lsp", -- css linter
+        "emmet-language-server", -- css/html completions
+        "lua-language-server",
+        "marksman", -- markdown lsp
+        "stylelint-lsp",
+        "taplo", -- toml lsp
+        "typescript-language-server",
+        "typos-lsp", -- spellchecker for code
       },
     },
   },
