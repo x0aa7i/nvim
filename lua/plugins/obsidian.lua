@@ -56,7 +56,7 @@ return {
         -- Optional, if you want to change the date format of the default alias of daily notes.
         alias_format = "%B %-d, %Y",
         -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
-        -- template = "Assets/Templates/nvim/daily.md",
+        template = "Assets/Templates/nvim/daily.md",
       },
 
       mappings = {
@@ -84,6 +84,41 @@ return {
         substitutions = {},
       },
     },
+  },
+  {
+    "letieu/jot.lua",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    keys = {
+      {
+        "<leader>nj",
+        function()
+          require("jot").open()
+        end,
+        desc = "Project note (jot)",
+      },
+    },
+  },
+  { -- emphasized headers & code blocks in markdown
+    "lukas-reineke/headlines.nvim",
+    ft = { "markdown", "norg", "rmd", "org" },
+    opts = function()
+      local opts = {}
+      for _, ft in ipairs({ "markdown", "norg", "rmd", "org" }) do
+        opts[ft] = {
+          headline_highlights = {},
+          -- disable bullets for now. See https://github.com/lukas-reineke/headlines.nvim/issues/66
+          bullets = {},
+          fat_headlines = false,
+          -- dash_string = "─",
+        }
+        for i = 1, 6 do
+          local hl = "Headline" .. i
+          vim.api.nvim_set_hl(0, hl, { link = "Headline", default = true })
+          table.insert(opts[ft].headline_highlights, hl)
+        end
+      end
+      return opts
+    end,
   },
   {
     "folke/which-key.nvim",
