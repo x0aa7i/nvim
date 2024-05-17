@@ -16,7 +16,7 @@ local base_configs = {
   quit_map = "q", -- set keymap for close the response window
   retry_map = "<c-r>", -- set keymap to re-send the current prompt
   -- list_models = '<omitted lua function>', -- Retrieves a list of model names
-  display_mode = "split", -- The display mode. Can be "float" or "split".
+  display_mode = "float", -- The display mode. Can be "float" or "split".
   show_prompt = false, -- Shows the prompt submitted to Ollama.
   show_model = false, -- Displays which model you are using at the beginning of your chat session.
   no_auto_close = false, -- Never closes the window automatically.
@@ -57,12 +57,28 @@ local ollama_configs = {
 }
 
 return {
-  "David-Kunz/gen.nvim",
-  config = function()
-    if use_local then
-      require("gen").setup(vim.tbl_deep_extend("force", ollama_configs, base_configs))
-    else
-      require("gen").setup(vim.tbl_deep_extend("force", groq_configs, base_configs))
-    end
-  end,
+  {
+    "David-Kunz/gen.nvim",
+    keys = {
+      { "<leader>aa", ":Gen<cr>", mode = { "n", "v" }, desc = "Gen" },
+      { "<leader>ac", ":Gen Chat<cr>", mode = { "n", "v" }, desc = "Chat" },
+      { "<leader>ae", ":Gen Enhance_Grammar_Spelling<cr>", mode = "v", desc = "Enhance Grammar and Spelling" },
+    },
+    config = function()
+      if use_local then
+        require("gen").setup(vim.tbl_deep_extend("force", ollama_configs, base_configs))
+      else
+        require("gen").setup(vim.tbl_deep_extend("force", groq_configs, base_configs))
+      end
+    end,
+  },
+  {
+    "folke/which-key.nvim",
+    optional = true,
+    opts = {
+      defaults = {
+        ["<leader>a"] = { name = "ai" },
+      },
+    },
+  },
 }
