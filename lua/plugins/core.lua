@@ -14,7 +14,6 @@ return {
         other = " ",
       },
       kinds = {
-        -- Codeium = "󰘦 ",
         Codeium = "󰚩 ",
       },
     },

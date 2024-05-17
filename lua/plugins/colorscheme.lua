@@ -13,6 +13,7 @@ return {
         -- colors.bg_light = "#2a2d3f"
         -- colors.terminal_black = "#414868"
         -- colors.fg = "#c0caf5"
+        colors.fg = "#a9b1d6"
         -- colors.fg_dark = "#a9b1d6"
         -- colors.fg_gutter = "#3b4261"
         -- colors.dark3 = "#545c7e"
