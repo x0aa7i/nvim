@@ -29,8 +29,8 @@ map("n", "<leader>O", "m`O<esc>``", { desc = "Insert blank line below" })
 map({ "i", "n", "v" }, "<C-a>", "<esc>ggVG")
 
 -- Text navigation
-map("n", "<S-l>", "$")
-map("n", "<S-h>", "^")
+map("n", "L", "g$")
+map("n", "H", "g^")
 
 -- Delete word with backspace
 map("i", "<C-BS>", "<C-w>")
