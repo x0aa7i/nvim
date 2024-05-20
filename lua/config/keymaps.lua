@@ -21,6 +21,12 @@ map("n", "<S-q>", "<cmd>bdelete<CR>")
 -- Press jk fast to enter normal mode
 map("i", "jk", "<ESC>")
 
+-- Paste over currently selected text without yanking it
+map("v", "p", '"_dp')
+map("v", "P", '"_dP')
+
+map({ "v", "n" }, "<leader>p", '"0p', { desc = "Paste from clipboard" })
+
 -- inset empty blank line above/below
 map("n", "<leader>o", "m`o<esc>``", { desc = "Insert blank line above" })
 map("n", "<leader>O", "m`O<esc>``", { desc = "Insert blank line below" })
@@ -28,9 +34,9 @@ map("n", "<leader>O", "m`O<esc>``", { desc = "Insert blank line below" })
 -- select all
 map({ "i", "n", "v" }, "<C-a>", "<esc>ggVG")
 
--- Text navigation
-map("n", "L", "g$")
-map("n", "H", "g^")
+-- Move to start/end of line
+map({ "n", "x", "o" }, "H", "g^")
+map({ "n", "x", "o" }, "L", "g$")
 
 -- Delete word with backspace
 map("i", "<C-BS>", "<C-w>")
