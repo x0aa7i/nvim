@@ -1,11 +1,7 @@
 return {
   {
     "lewis6991/gitsigns.nvim",
-    optional = true,
-    opts = {
-      signcolumn = true,
-      numhl = true,
-    },
+    enabled = true,
   },
   {
     "neovim/nvim-lspconfig",
@@ -18,7 +14,7 @@ return {
   },
   { -- better statuscolumn
     "luukvbaal/statuscol.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "LazyFile" },
     opts = function()
       local builtin = require("statuscol.builtin")
       return {
@@ -29,8 +25,8 @@ return {
             sign = { name = { "Diagnostic*" }, text = { ".*" }, maxwidth = 1, colwidth = 1, auto = true },
             click = "v:lua.ScSa",
           },
-          { sign = { namespace = { "gitsigns" } }, click = "v:lua.ScSa" },
           {
+            -- line number
             text = { builtin.lnumfunc, " " },
             condition = { true, builtin.not_empty },
             click = "v:lua.ScLa",
