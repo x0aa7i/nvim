@@ -17,8 +17,6 @@ return {
     dependencies = {
       -- Required.
       "nvim-lua/plenary.nvim",
-
-      -- see below for full list of optional dependencies 👇
     },
     keys = {
       { "<leader>nd", "<cmd>ObsidianDailies<CR>", desc = "Daily notes" },
@@ -26,7 +24,7 @@ return {
       { "<leader>nt", "<cmd>ObsidianTemplate<CR>", desc = "Template" },
       { "<leader>nb", "<cmd>ObsidianBacklinks<cr>", desc = "Backlinks" },
       { "<leader>nl", "<cmd>ObsidianLink<cr>", desc = "Link selection" },
-      { "<leader>nf", "<cmd>ObsidianFollowLink<cr>", desc = "Follow link" },
+      { "<leader>nf", "<cmd>ObsidianFollowLink<cr>", desc = "Follow link under cursor" },
       { "<leader>ns", "<cmd>ObsidianSearch<cr>", desc = "Search" },
       { "<leader>nr", "<cmd>ObsidianRename<cr>", desc = "Rename" },
       { "<leader>nf", "<cmd>ObsidianQuickSwitch<cr>", desc = "Find" },
@@ -44,9 +42,6 @@ return {
       completion = {
         nvim_cmp = true,
       },
-
-      disable_frontmatter = true,
-
       -- see below for full list of options 👇
       daily_notes = {
         -- Optional, if you keep daily notes in a separate directory.
@@ -59,6 +54,49 @@ return {
         template = "Assets/Templates/nvim/daily.md",
       },
 
+      templates = {
+        folder = "Assets/Templates",
+        date_format = "%Y-%m-%d",
+        time_format = "%H:%M",
+        -- A map for custom variables, the key should be the variable and the value a function
+        substitutions = {
+          ["now"] = function()
+            return os.date("%Y-%m-%d %H:%M")
+          end,
+          ["long-date"] = function()
+            return os.date("%A, %B %d %Y")
+          end,
+        },
+      },
+
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = { "markdown" },
+      },
+
+      -- `true` indicates that you don't want obsidian.nvim to manage frontmatter.
+      disable_frontmatter = true,
+
+      -- Optional, alternatively you can customize the frontmatter data.
+      ---@return table
+      note_frontmatter_func = function(note)
+        local out = {
+          aliases = note.aliases,
+          tags = note.tags,
+          created = os.date("%Y-%m-%d %H:%M"),
+        }
+
+        -- `note.metadata` contains any manually added fields in the frontmatter.
+        -- So here we just make sure those fields are kept in the frontmatter.
+        if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+          for k, v in pairs(note.metadata) do
+            out[k] = v
+          end
+        end
+
+        return out
+      end,
+
       mappings = {
         -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
         ["gf"] = {
@@ -68,33 +106,26 @@ return {
           opts = { noremap = false, expr = true, buffer = true },
         },
         -- Toggle check-boxes.
-        ["<leader>ch"] = {
+        ["<leader>nc"] = {
           action = function()
             return require("obsidian").util.toggle_checkbox()
           end,
-          opts = { buffer = true },
+          opts = { buffer = true, desc = "Toggle checkbox" },
         },
       },
 
-      templates = {
-        folder = "Assets/Templates",
-        date_format = "%Y-%m-%d",
-        time_format = "%H:%M",
-        -- A map for custom variables, the key should be the variable and the value a function
-        substitutions = {},
-      },
-    },
-  },
-  {
-    "letieu/jot.lua",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    keys = {
-      {
-        "<leader>nj",
-        function()
-          require("jot").open()
-        end,
-        desc = "Project note (jot)",
+      ui = {
+        checkboxes = {
+          -- NOTE: the 'char' value has to be a single character, and the highlight groups are defined below.
+          [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
+          ["x"] = { char = "", hl_group = "ObsidianDone" },
+          [">"] = { char = "", hl_group = "ObsidianRightArrow" },
+          ["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
+
+          ["%-"] = { char = "󰛲", hl_group = "Comment" },
+          ["!"] = { char = "󰩳", hl_group = "Error" },
+          ["%?"] = { char = "󰞋", hl_group = "Added" },
+        },
       },
     },
   },
@@ -111,11 +142,11 @@ return {
           fat_headlines = false,
           -- dash_string = "─",
         }
-        for i = 1, 6 do
-          local hl = "Headline" .. i
-          vim.api.nvim_set_hl(0, hl, { link = "Headline", default = true })
-          table.insert(opts[ft].headline_highlights, hl)
-        end
+        -- for i = 1, 6 do
+        --   local hl = "Headline" .. i
+        --   vim.api.nvim_set_hl(0, hl, { link = "Headline", default = true })
+        --   table.insert(opts[ft].headline_highlights, hl)
+        -- end
       end
       return opts
     end,
@@ -124,7 +155,7 @@ return {
     "folke/which-key.nvim",
     opts = {
       defaults = {
-        ["<leader>n"] = { name = "obsidian" },
+        ["<leader>n"] = { name = "obsidian notes" },
       },
     },
   },
