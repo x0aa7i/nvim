@@ -60,15 +60,68 @@ return {
   {
     "David-Kunz/gen.nvim",
     keys = {
-      { "<leader>aa", ":Gen<cr>", mode = { "n", "v" }, desc = "Gen" },
-      { "<leader>ac", ":Gen Chat<cr>", mode = { "n", "v" }, desc = "Chat" },
+      { "<leader>aa", ":Gen<cr>", mode = "n", desc = "Gen" },
+      { "<leader>aa", ":Gen Generate_Selection<cr>", mode = "v", desc = "Generate" },
+      { "<leader>am", ":Gen Summarize<cr>", mode = "v", desc = "Summarize" },
+      { "<leader>ar", ":Gen Rewrite<cr>", mode = "v", desc = "Rewrite" },
+      { "<leader>ac", ":Gen Comment<cr>", mode = "v", desc = "Comment" },
       { "<leader>ae", ":Gen Enhance_Grammar_Spelling<cr>", mode = "v", desc = "Enhance Grammar and Spelling" },
+      { "<leader>as", ":Gen Make_Concise<cr>", mode = "v", desc = "Make Concise" },
+      { "<leader>ag", ":Gen Generate<cr>", mode = "v", desc = "Generate" },
+      { "<leader>af", ":Gen Fix_Code<cr>", mode = "v", desc = "Fix Code" },
+      { "<leader>aw", ":Gen Enhance_Wording<cr>", mode = "v", desc = "Enhance Wording" },
     },
     config = function()
+      local gen = require("gen")
+
+      gen.prompts = {
+        Generate = { prompt = "$input, keep the output short.", replace = true },
+        Generate_Selection = { prompt = "$text, keep the output short.", replace = true },
+        Summarize = { prompt = "Summarize the following text:\n$text" },
+        Ask = { prompt = "Regarding the following text, $input:\n$text" },
+        Rewrite = {
+          prompt = "Rewrite the following text to improve grammar and readability, just output the final text only without additional quotes around it:\n$text",
+          replace = true,
+        },
+        Comment = {
+          prompt = "Explain the following code snippet and write it as a comment, just output the final text without additional quotes around it:\n$text",
+        },
+        Enhance_Grammar_Spelling = {
+          prompt = "Modify the following text to improve grammar and spelling, just output the final text only and without additional quotes around it:\n$text",
+          replace = true,
+        },
+        Enhance_Wording = {
+          prompt = "Modify the following text to use better wording, just output the final text without additional quotes around it:\n$text",
+          replace = true,
+        },
+        Make_Concise = {
+          prompt = "Modify the following text to make it as simple and concise as possible, just output the final text without additional quotes around it:\n$text",
+          replace = true,
+        },
+        Review_Code = {
+          prompt = "Review the following code and make concise suggestions:\n```$filetype\n$text\n```",
+        },
+        Enhance_Code = {
+          prompt = "Enhance the following code, only output the result in format ```$filetype\n...\n```:\n```$filetype\n$text\n```",
+          replace = true,
+          extract = "```$filetype\n(.-)```",
+        },
+        Change_Code = {
+          prompt = "Regarding the following code, $input, only output the result in format ```$filetype\n...\n```:\n```$filetype\n$text\n```",
+          replace = true,
+          extract = "```$filetype\n(.-)```",
+        },
+        Fix_Code = {
+          prompt = "Fix the following code. Only ouput the result in format ```$filetype\n...\n```:\n```$filetype\n$text\n```",
+          replace = true,
+          extract = "```$filetype\n(.-)```",
+        },
+      }
+
       if use_local then
-        require("gen").setup(vim.tbl_deep_extend("force", ollama_configs, base_configs))
+        gen.setup(vim.tbl_deep_extend("force", ollama_configs, base_configs))
       else
-        require("gen").setup(vim.tbl_deep_extend("force", groq_configs, base_configs))
+        gen.setup(vim.tbl_deep_extend("force", groq_configs, base_configs))
       end
     end,
   },
