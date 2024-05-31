@@ -4,5 +4,10 @@ return {
   opts = {
     winblend = 60,
     excluded_filetypes = { "neo-tree", "dashboard" },
+    handlers = {
+      gitsigns = {
+        enable = false,
+      },
+    },
   },
 }
