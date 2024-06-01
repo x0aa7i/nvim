@@ -22,8 +22,8 @@ map("n", "<S-q>", "<cmd>bdelete<CR>")
 map("i", "jk", "<ESC>")
 
 -- Paste over currently selected text without yanking it
-map("v", "p", '"_dp')
-map("v", "P", '"_dP')
+-- map("v", "p", '"_dp')
+-- map("v", "P", '"_dP')
 
 map({ "v", "n" }, "<leader>p", '"0p', { desc = "Paste from clipboard" })
 
@@ -43,6 +43,12 @@ map("i", "<C-BS>", "<C-w>")
 
 map("n", "<cr>", "ciw", { desc = "Change word under cursor" })
 map("n", "gl", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+
+-- Google search
+local searching_google_in_visual =
+  [[<ESC>gv"gy<ESC>:lua vim.fn.system({'xdg-open', 'https://google.com/search?q=' .. vim.fn.getreg('g')})<CR>]]
+
+vim.keymap.set("v", "gx", searching_google_in_visual, { silent = true, noremap = true })
 
 local Util = require("lazyvim.util")
 -- local unmap = vim.keymap.del
