@@ -1,6 +1,10 @@
 return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
+  init = function()
+    -- Show the current document symbols location from Trouble in lualine
+    vim.g.trouble_lualine = false
+  end,
   opts = function(_, opts)
     local function total_lines()
       return "󰦨 " .. vim.api.nvim_buf_line_count(0)
