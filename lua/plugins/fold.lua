@@ -1,9 +1,5 @@
 return {
   {
-    "lewis6991/gitsigns.nvim",
-    enabled = true,
-  },
-  {
     "neovim/nvim-lspconfig",
     optional = true,
     init = function()
@@ -15,14 +11,14 @@ return {
   { -- better statuscolumn
     "luukvbaal/statuscol.nvim",
     event = { "LazyFile" },
-    opts = function()
+    config = function()
       local builtin = require("statuscol.builtin")
-      return {
+      require("statuscol").setup({
         ft_ignore = { "neo-tree", "neo-tree-popup", "alpha", "lazy", "mason" },
         relculright = true, -- whether to right-align the cursor line number with 'relativenumber' set
         segments = {
           {
-            sign = { name = { "Diagnostic*" }, text = { ".*" }, maxwidth = 1, colwidth = 1, auto = true },
+            sign = { name = { "Diagnostic*" }, text = { ".*" }, maxwidth = 1, colwidth = 2, auto = false },
             click = "v:lua.ScSa",
           },
           {
@@ -33,18 +29,15 @@ return {
           },
           { text = { builtin.foldfunc, " " }, click = "v:lua.ScFa" },
         },
-      }
-    end,
-    init = function() end,
-    config = function(_, opts)
-      require("statuscol").setup(opts)
+      })
     end,
   },
+
   { -- better fold
     "kevinhwang91/nvim-ufo",
     event = { "BufRead", "BufNewFile" },
     dependencies = { "kevinhwang91/promise-async" },
-		-- stylua: ignore start
+  -- stylua: ignore start
     keys = {
       { 'zR', function() require('ufo').openAllFolds() end },
       { 'zM', function() require('ufo').closeAllFolds() end },
@@ -114,7 +107,7 @@ return {
         -- when opening the buffer, close these fold kinds
         -- use `:UfoInspect` to get available fold kinds from the LSP
         close_fold_kinds_for_ft = {
-          default = { "imports", "comment" },
+          -- default = { "imports", "comment" },
         },
         open_fold_hl_timeout = 400,
       }
