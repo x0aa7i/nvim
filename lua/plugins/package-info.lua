@@ -25,27 +25,17 @@ return {
       -- provided one, if nothing is provided it will use `yarn`
       package_manager = "pnpm",
     },
-    keys = function()
-      local function map(key, cmd, desc)
-        vim.keymap.set({ "n" }, "<leader>p" .. key, cmd, { desc = desc, silent = true, noremap = true })
-      end
-      local pi = require("package-info")
-      map("p", pi.toggle, "Toggle package info")
-      map("s", pi.show, "Show package info")
-      map("h", pi.hide, "Hide package info")
-      map("u", pi.update, "Update package")
-      map("d", pi.delete, "Delete package")
-      map("i", pi.install, "Install package")
-      map("v", pi.change_version, "Change package version")
-    end,
-  },
-  {
-    "folke/which-key.nvim",
-    optional = true,
-    opts = {
-      defaults = {
-        ["<leader>p"] = { name = "PackageInfo" },
-      },
+    keys = {
+      -- stylua: ignore start
+      { "<leader>p", "", desc = "PackageInfo" },
+      { "<leader>pp", function() require("package-info").toggle() end, desc = "Toggle package info" },
+      { "<leader>ps", function() require("package-info").show() end, desc = "Show package info" },
+      { "<leader>ph", function() require("package-info").hide() end, desc = "Hide package info" },
+      { "<leader>pu", function() require("package-info").update() end, desc = "Update package" },
+      { "<leader>pd", function() require("package-info").delete() end, desc = "Delete package" },
+      { "<leader>pi", function() require("package-info").install() end, desc = "Install package" },
+      { "<leader>pv", function() require("package-info").change_version() end, desc = "Change package version" },
+      -- stylua: ignore end
     },
   },
 }

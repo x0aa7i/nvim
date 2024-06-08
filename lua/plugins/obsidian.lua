@@ -19,6 +19,7 @@ return {
       "nvim-lua/plenary.nvim",
     },
     keys = {
+      { "<leader>n", "", desc = "+obsidian" },
       { "<leader>nd", "<cmd>ObsidianDailies<CR>", desc = "Daily notes" },
       { "<leader>nn", "<cmd>ObsidianNew<cr>", desc = "New note" },
       { "<leader>nt", "<cmd>ObsidianTemplate<CR>", desc = "Template" },
@@ -150,13 +151,5 @@ return {
       end
       return opts
     end,
-  },
-  {
-    "folke/which-key.nvim",
-    opts = {
-      defaults = {
-        ["<leader>n"] = { name = "obsidian notes" },
-      },
-    },
   },
 }

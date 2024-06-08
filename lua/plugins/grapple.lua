@@ -9,6 +9,7 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     cmd = "Grapple",
     keys = {
+      { "<leader>h", "", desc = "+grapple" },
       { "<leader>ha", "<cmd>Grapple tag<cr>", desc = "Add file" },
       { "<leader>hd", "<cmd>Grapple untag<cr>", desc = "Remove file" },
       { "<leader>hl", "<cmd>Grapple toggle_tags<cr>", desc = "Open tags list window" },
@@ -23,15 +24,6 @@ return {
       { "<A-4>", "<cmd>Grapple select index=4<cr>", desc = "Select index 4" },
       { "<A-5>", "<cmd>Grapple select index=5<cr>", desc = "Select index 5" },
       { "<A-6>", "<cmd>Grapple select index=6<cr>", desc = "Select index 6" },
-    },
-  },
-  {
-    "folke/which-key.nvim",
-    optional = true,
-    opts = {
-      defaults = {
-        ["<leader>h"] = { name = "Grapple" },
-      },
     },
   },
 }

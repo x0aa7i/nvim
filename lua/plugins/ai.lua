@@ -60,6 +60,7 @@ return {
   {
     "David-Kunz/gen.nvim",
     keys = {
+      { "<leader>a", "", mode = { "n", "v" }, desc = "+ai" },
       { "<leader>aa", ":Gen<cr>", mode = "n", desc = "Gen" },
       { "<leader>aa", ":Gen Generate_Selection<cr>", mode = "v", desc = "Generate" },
       { "<leader>am", ":Gen Summarize<cr>", mode = "v", desc = "Summarize" },
@@ -124,14 +125,5 @@ return {
         gen.setup(vim.tbl_deep_extend("force", groq_configs, base_configs))
       end
     end,
-  },
-  {
-    "folke/which-key.nvim",
-    optional = true,
-    opts = {
-      defaults = {
-        ["<leader>a"] = { name = "ai" },
-      },
-    },
   },
 }
