@@ -10,7 +10,7 @@ return {
         -- colors.bg = "#1a1b26"
         -- colors.bg = "#16161e"
         -- colors.bg_highlight = "#212231"
-        -- colors.bg_light = "#2a2d3f"
+        colors.bg_light = "#2a2d3f"
         -- colors.terminal_black = "#414868"
         -- colors.fg = "#c0caf5"
         colors.fg = "#a9b1d6"
@@ -71,11 +71,11 @@ return {
         H.NeoTreeGitUntracked = { fg = C.green, bold = true }
         -- H.GitSignsAdd = { fg = C.green }
         -- H.GitSignsChange = { fg = C.yellow2 }
-        -- H.GitSignsDelete
-        H.IlluminatedWordText = { bg = C.bg_light }
-        H.IlluminatedWordRead = { bg = C.bg_light }
-        H.IlluminatedWordWrite = { bg = C.bg_light }
-        H.TreesitterContext = { bg = C.bg_light }
+        -- H.GitSignsDelete = { fg = C.red }
+        H.CursorLineNr = { fg = C.magenta, style = "bold" }
+        H.CursorLine = { bg = C.bg_highlight }
+        H.SatelliteBar = { bg = C.terminal_black } -- scrollbar
+        H.ActionText = { fg = C.yellow }
       end,
     })
   end,
