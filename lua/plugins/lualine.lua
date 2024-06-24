@@ -12,7 +12,16 @@ return {
 
     opts.options.component_separators = ""
 
-    opts.sections.lualine_a = { { "mode", icon = { "" } } }
+    opts.sections.lualine_a = {
+      {
+        "mode",
+        icon = { "" },
+        fmt = function(str)
+          return str:sub(1, 3)
+        end,
+      },
+    }
+
     opts.sections.lualine_b = {}
 
     table.insert(opts.sections.lualine_c, { "filesize", color = { fg = "#737aa2" } })
