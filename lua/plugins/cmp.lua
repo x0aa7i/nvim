@@ -3,6 +3,25 @@ return {
   dependencies = {
     { "octaltree/cmp-look", ft = { "markdown", "text" } }, -- dictionary
   },
+  keys = {
+    {
+      "<Tab>",
+      function()
+        local supermaven = require("supermaven-nvim.completion_preview")
+
+        if vim.snippet.active({ direction = 1 }) then
+          return "<cmd>lua vim.snippet.jump(1)<cr>"
+        elseif supermaven.has_suggestion() then
+          return "<cmd>lua require('supermaven-nvim.completion_preview').on_accept_suggestion()<cr>"
+        end
+
+        return "<Tab>"
+      end,
+      expr = true,
+      silent = true,
+      mode = { "i", "s" },
+    },
+  },
   opts = function(_, opts)
     local has_words_before = function()
       unpack = unpack or table.unpack
