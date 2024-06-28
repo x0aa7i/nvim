@@ -21,6 +21,17 @@ return {
         view = "mini",
         opts = { lang = "svelte", skip = true },
       },
+      -- Supermaven
+      {
+        filter = {
+          event = "msg_show",
+          any = {
+            { find = "Starting Supermaven" },
+            { find = "Supermaven Free Tier" },
+          },
+        },
+        skip = true,
+      },
     })
 
     opts.views = {
