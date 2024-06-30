@@ -1,31 +1,30 @@
 return {
-  {
-    "vuki656/package-info.nvim",
-    dependencies = { "folke/which-key.nvim", "MunifTanjim/nui.nvim" },
-    ft = { "json" },
-    opts = {
-      colors = {
-        up_to_date = "#B1D99C", -- Text color for up to date dependency virtual text
-        outdated = "#EAAC86", -- Text color for outdated dependency virtual text
-      },
-
-      icons = {
-        enable = true, -- Whether to display icons
-        style = {
-          up_to_date = "|  ", -- Icon for up to date dependencies
-          outdated = "|  ", -- Icon for outdated dependencies
-        },
-      },
-      autostart = true, -- Whether to autostart when `package.json` is opened
-      hide_up_to_date = false, -- It hides up to date versions when displaying virtual text
-      hide_unstable_versions = false, -- It hides unstable versions from version list e.g next-11.1.3-canary3
-      -- Can be `npm`, `yarn`, or `pnpm`. Used for `delete`, `install` etc...
-      -- The plugin will try to auto-detect the package manager based on
-      -- `yarn.lock` or `package-lock.json`. If none are found it will use the
-      -- provided one, if nothing is provided it will use `yarn`
-      package_manager = "pnpm",
+  "vuki656/package-info.nvim",
+  dependencies = { "folke/which-key.nvim", "MunifTanjim/nui.nvim" },
+  ft = { "json" },
+  opts = {
+    colors = {
+      up_to_date = "#B1D99C", -- Text color for up to date dependency virtual text
+      outdated = "#EAAC86", -- Text color for outdated dependency virtual text
     },
-    keys = {
+
+    icons = {
+      enable = true, -- Whether to display icons
+      style = {
+        up_to_date = "|  ", -- Icon for up to date dependencies
+        outdated = "|  ", -- Icon for outdated dependencies
+      },
+    },
+    autostart = true, -- Whether to autostart when `package.json` is opened
+    hide_up_to_date = false, -- It hides up to date versions when displaying virtual text
+    hide_unstable_versions = false, -- It hides unstable versions from version list e.g next-11.1.3-canary3
+    -- Can be `npm`, `yarn`, or `pnpm`. Used for `delete`, `install` etc...
+    -- The plugin will try to auto-detect the package manager based on
+    -- `yarn.lock` or `package-lock.json`. If none are found it will use the
+    -- provided one, if nothing is provided it will use `yarn`
+    package_manager = "pnpm",
+  },
+  keys = {
       -- stylua: ignore start
       { "<leader>p", "", desc = "PackageInfo" },
       { "<leader>pp", function() require("package-info").toggle() end, desc = "Toggle package info" },
@@ -35,7 +34,6 @@ return {
       { "<leader>pd", function() require("package-info").delete() end, desc = "Delete package" },
       { "<leader>pi", function() require("package-info").install() end, desc = "Install package" },
       { "<leader>pv", function() require("package-info").change_version() end, desc = "Change package version" },
-      -- stylua: ignore end
-    },
+    -- stylua: ignore end
   },
 }
