@@ -4,3 +4,5 @@
 
 -- vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
 vim.opt.linebreak = true
+vim.opt.breakindent = true -- Every wrapped line will continue visually indented
+vim.opt.breakindentopt = "list:-1"
