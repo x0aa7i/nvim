@@ -15,16 +15,17 @@ end
 
 return {
   "monaqa/dial.nvim",
-  keys = {
+  keys = function()
+    return {
     -- stylua: ignore start
     { "<leader>ci", function() return M.dial(true) end, expr = true, desc = "Increment", mode = {"n", "v"} },
     { "<leader>cd", function() return M.dial(false) end, expr = true, desc = "Decrement", mode = {"n", "v"} },
 
-    { "<C-a>", false },
     { "<C-x>", function() return M.dial(false) end, expr = true, desc = "Decrement", mode = {"n", "v"} },
     { "g<C-a>", function() return M.dial(true, true) end, expr = true, desc = "Increment", mode = {"n", "v"} },
     { "g<C-x>", function() return M.dial(false, true) end, expr = true, desc = "Decrement", mode = {"n", "v"} },
-  },
+    }
+  end,
   config = function(_, opts)
     require("dial.config").augends:register_group(opts.groups)
     M.dials_by_ft = opts.dials_by_ft
