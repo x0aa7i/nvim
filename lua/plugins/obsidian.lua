@@ -22,6 +22,7 @@ return {
       { "<leader>n", "", desc = "+obsidian" },
       { "<leader>nd", "<cmd>ObsidianDailies<CR>", desc = "Daily notes" },
       { "<leader>nn", "<cmd>ObsidianNew<cr>", desc = "New note" },
+      { "<leader>nj", "<cmd>ObsidianToday<CR>", desc = "Today note" },
       { "<leader>nt", "<cmd>ObsidianTemplate<CR>", desc = "Template" },
       { "<leader>nb", "<cmd>ObsidianBacklinks<cr>", desc = "Backlinks" },
       { "<leader>nl", "<cmd>ObsidianLink<cr>", desc = "Link selection" },
@@ -132,6 +133,7 @@ return {
   },
   { -- emphasized headers & code blocks in markdown
     "lukas-reineke/headlines.nvim",
+    enabled = false,
     ft = { "markdown", "norg", "rmd", "org" },
     opts = function()
       local opts = {}
