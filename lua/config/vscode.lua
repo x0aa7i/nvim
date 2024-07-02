@@ -130,11 +130,11 @@ map("n", "]g", vscode_action("workbench.action.editor.nextChange"))
 map("n", "[g", vscode_action("workbench.action.editor.prevChange"))
 map("n", "gr", vscode_action("editor.action.referenceSearch.trigger"))
 
-map("n", "<leader>cc", vscode.action("workbench.action.commentLine"))
-map("n", "<leader>sg", vscode.action("workbench.action.findInFiles"))
-map("n", "<leader>ci", vscode.action("extension.toggleBool"))
-map("n", "<leader>e", vscode.action("workbench.view.explorer"))
-map("n", "<leader>ff", vscode.action("workbench.action.quickOpen"))
+map("n", "<leader>cc", vscode_action("workbench.action.commentLine"))
+map("n", "<leader>sg", vscode_action("workbench.action.findInFiles"))
+map("n", "<leader>ci", vscode_action("extension.toggleBool"))
+map("n", "<leader>e", vscode_action("workbench.view.explorer"))
+map("n", "<leader>ff", vscode_action("workbench.action.quickOpen"))
 
 -- Text navigation
 map("n", "L", "$")
