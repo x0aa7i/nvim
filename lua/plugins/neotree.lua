@@ -6,12 +6,23 @@ return {
     opts.retain_hidden_root_indent = true
 
     opts.window = opts.window or {}
-    opts.window.position = "float"
+    opts.window.position = "left"
 
     opts.window.mappings = opts.window.mappings or {}
     opts.window.mappings["<space>"] = {
       "toggle_node",
       nowait = true, -- disable `nowait` if you have existing combos starting with this char that you want to use
+    }
+
+    -- Sources
+    opts.source_selector = {
+      winbar = true,
+      show_scrolled_off_parent_node = true,
+      sources = {
+        { source = "filesystem", display_name = "  Files" }, --     
+        { source = "git_status", display_name = " 󰊢 Git" }, -- 󰊢    
+        { source = "buffers", display_name = "  Buffers" }, --   
+      },
     }
 
     -- Show hidden files
@@ -33,6 +44,7 @@ return {
 
     opts.default_component_configs.git_status = opts.default_component_configs.git_status or {}
     opts.default_component_configs.git_status.symbols = opts.default_component_configs.git_status.symbols or {}
+
     -- Change git status type
     opts.default_component_configs.git_status.symbols.added = "" -- or  "✚", but this is redundant info if you use git_status_colors on the name
     opts.default_component_configs.git_status.symbols.modified = "" -- or 󰧞 "", but this is redundant info if you use git_status_colors on the name

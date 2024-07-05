@@ -17,5 +17,10 @@ return {
         "yazi",
       },
     },
+    always = {
+      cursorline = {
+        "neo-tree",
+      },
+    },
   },
 }

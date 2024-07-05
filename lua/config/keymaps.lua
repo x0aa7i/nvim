@@ -16,7 +16,7 @@ map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 map({ "i", "n" }, "<C-q>", "<cmd>q<cr>", { desc = "Quit" })
 
 -- Close buffers
-map("n", "<S-q>", "<cmd>bdelete<CR>")
+-- map("n", "<S-q>", "<cmd>bdelete<CR>")
 
 -- Press jk fast to enter normal mode
 map("i", "jk", "<ESC>")

@@ -14,7 +14,16 @@ return {
     config = function()
       local builtin = require("statuscol.builtin")
       require("statuscol").setup({
-        ft_ignore = { "neo-tree", "neo-tree-popup", "alpha", "lazy", "mason" },
+        ft_ignore = {
+          "neo-tree",
+          "neo-tree-popup",
+          "alpha",
+          "dashboard",
+          "lazy",
+          "mason",
+          "noice",
+          "toggleterm",
+        },
         relculright = true, -- whether to right-align the cursor line number with 'relativenumber' set
         segments = {
           {
@@ -92,6 +101,10 @@ return {
         return newVirtText
       end
 
+      local ft_providers = {
+        ["neo-tree"] = "",
+      }
+
       return {
         fold_virt_text_handler = handler,
         provider_selector = function(_, ft, _)
@@ -102,7 +115,7 @@ return {
           if vim.tbl_contains(lspWithOutFolding, ft) then
             return { "treesitter", "indent" }
           end
-          return { "lsp", "indent" }
+          return ft_providers[ft] or { "treesitter", "indent" }
         end,
         -- when opening the buffer, close these fold kinds
         -- use `:UfoInspect` to get available fold kinds from the LSP
