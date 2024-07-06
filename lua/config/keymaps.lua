@@ -25,7 +25,7 @@ map("i", "jk", "<ESC>")
 -- map("v", "p", '"_dp')
 -- map("v", "P", '"_dP')
 
-map({ "v", "n" }, "<leader>p", '"0p', { desc = "Paste from clipboard" })
+-- map({ "v", "n" }, "<leader>p", '"0p', { desc = "Paste from clipboard" })
 
 -- inset empty blank line above/below
 map("n", "<leader>o", "m`o<esc>``", { desc = "Insert blank line above" })
