@@ -9,20 +9,29 @@ return {
     local function total_lines()
       return "󰦨 " .. vim.api.nvim_buf_line_count(0)
     end
-
     opts.options.component_separators = ""
 
     opts.sections.lualine_a = {
       {
         "mode",
-        icon = { "" },
+        icon = { "" }, --  
         fmt = function(str)
           return str:sub(1, 3)
         end,
       },
     }
 
-    opts.sections.lualine_b = {}
+    opts.sections.lualine_b = {
+      {
+        "branch",
+        icon = "",
+        cond = function()
+          -- only if not on main or master
+          local branch = require("lualine.components.branch.git_branch").get_branch()
+          return branch ~= "main" and branch ~= "master"
+        end,
+      },
+    }
 
     table.insert(opts.sections.lualine_c, { "filesize", color = { fg = "#737aa2" } })
     table.insert(opts.sections.lualine_x, { total_lines, color = { fg = "#a9b1d6" } })
