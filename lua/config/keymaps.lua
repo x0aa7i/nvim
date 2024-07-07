@@ -10,22 +10,11 @@ local function map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
-map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-
 -- Quit
-map({ "i", "n" }, "<C-q>", "<cmd>q<cr>", { desc = "Quit" })
-
--- Close buffers
--- map("n", "<S-q>", "<cmd>bdelete<CR>")
+map({ "n" }, "<C-q>", "<cmd>qa<cr>", { desc = "Quit all" })
 
 -- Press jk fast to enter normal mode
 map("i", "jk", "<ESC>")
-
--- Paste over currently selected text without yanking it
--- map("v", "p", '"_dp')
--- map("v", "P", '"_dP')
-
--- map({ "v", "n" }, "<leader>p", '"0p', { desc = "Paste from clipboard" })
 
 -- inset empty blank line above/below
 map("n", "<leader>o", "m`o<esc>``", { desc = "Insert blank line above" })
