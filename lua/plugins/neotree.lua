@@ -9,10 +9,12 @@ return {
     opts.window.position = "left"
 
     opts.window.mappings = opts.window.mappings or {}
-    opts.window.mappings["<space>"] = {
-      "toggle_node",
-      nowait = true, -- disable `nowait` if you have existing combos starting with this char that you want to use
-    }
+    -- opts.window.mappings["<space>"] = {
+    --   "toggle_node",
+    --   nowait = true, -- disable `nowait` if you have existing combos starting with this char that you want to use
+    -- }
+    opts.window.mappings["<tab>"] = "next_source"
+    opts.window.mappings["<s-tab>"] = "prev_source"
 
     -- Sources
     opts.source_selector = {
@@ -45,17 +47,18 @@ return {
     opts.default_component_configs.git_status = opts.default_component_configs.git_status or {}
     opts.default_component_configs.git_status.symbols = opts.default_component_configs.git_status.symbols or {}
 
-    -- Change git status type
-    opts.default_component_configs.git_status.symbols.added = "" -- or  "✚", but this is redundant info if you use git_status_colors on the name
-    opts.default_component_configs.git_status.symbols.modified = "" -- or 󰧞 "", but this is redundant info if you use git_status_colors on the name
-    opts.default_component_configs.git_status.symbols.deleted = "" -- this can only be used in the git_status source
-    opts.default_component_configs.git_status.symbols.renamed = "" -- this can only be used in the git_status source
-
-    opts.default_component_configs.git_status.symbols.untracked = "?" -- 
-    opts.default_component_configs.git_status.symbols.ignored = ""
-    opts.default_component_configs.git_status.symbols.unstaged = ""
-    opts.default_component_configs.git_status.symbols.staged = ""
-    opts.default_component_configs.git_status.symbols.conflict = ""
+    -- Change git status icons (default:  ✚    󰊢        )
+    opts.default_component_configs.git_status.symbols = {
+      added = "", -- or  "✚", but this is redundant info if you use git_status_colors on the name
+      modified = "", -- or 󰧞 "", but this is redundant info if you use git_status_colors on the name
+      deleted = "", -- this can only be used in the git_status source
+      renamed = "", -- this can only be used in the git_status source
+      untracked = "?", -- 
+      ignored = "",
+      unstaged = "",
+      staged = "",
+      conflict = "",
+    }
 
     opts.default_component_configs.filesystem = opts.default_component_configs.filesystem or {}
     opts.default_component_configs.filesystem.commands = opts.default_component_configs.filesystem.commands or {}
