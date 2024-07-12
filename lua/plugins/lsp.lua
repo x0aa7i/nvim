@@ -2,7 +2,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      -- { "artemave/workspace-diagnostics.nvim", opts = {} },
+      { "artemave/workspace-diagnostics.nvim", opts = {} },
     },
     opts = function(_, opts)
       opts.servers = opts.servers or {}
@@ -69,34 +69,10 @@ return {
       end)
 
       -- Workspace diagnostics
-      -- LazyVim.lsp.on_attach(function(client, buffer)
-      --   require("workspace-diagnostics").populate_workspace_diagnostics(client, buffer)
-      -- end)
+      LazyVim.lsp.on_attach(function(client, buffer)
+        require("workspace-diagnostics").populate_workspace_diagnostics(client, buffer)
+      end)
     end,
-  },
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = {
-      -- add more treesitter parsers
-      ensure_installed = {
-        "bash",
-        "html",
-        "css",
-        "svelte",
-        "javascript",
-        "typescript",
-        "json",
-        "lua",
-        "markdown",
-        "markdown_inline",
-        "python",
-        "query",
-        "regex",
-        "yaml",
-        "toml",
-        "sql",
-      },
-    },
   },
   {
     "williamboman/mason.nvim",
