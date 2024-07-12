@@ -131,27 +131,33 @@ return {
       },
     },
   },
-  { -- emphasized headers & code blocks in markdown
-    "lukas-reineke/headlines.nvim",
-    enabled = false,
-    ft = { "markdown", "norg", "rmd", "org" },
+  {
+    "OXY2DEV/markview.nvim",
+    ft = { "markdown" },
     opts = function()
-      local opts = {}
-      for _, ft in ipairs({ "markdown", "norg", "rmd", "org" }) do
-        opts[ft] = {
-          headline_highlights = {},
-          -- disable bullets for now. See https://github.com/lukas-reineke/headlines.nvim/issues/66
-          bullets = {},
-          fat_headlines = false,
-          -- dash_string = "─",
+      local heading = function(level)
+        local icons = { "󰲡", "󰲣", "󰲥", "󰲧", "󰲩", "󰲫" }
+        return {
+          style = "label",
+          hl = "col_" .. level,
+          padding_left = " ",
+          padding_right = " ",
+          icon = string.rep(" ", level - 1) .. icons[level] .. "  ",
         }
-        -- for i = 1, 6 do
-        --   local hl = "Headline" .. i
-        --   vim.api.nvim_set_hl(0, hl, { link = "Headline", default = true })
-        --   table.insert(opts[ft].headline_highlights, hl)
-        -- end
       end
-      return opts
+
+      return {
+        headings = {
+          enable = true,
+          shift_width = 0,
+          heading_1 = heading(1),
+          heading_2 = heading(2),
+          heading_3 = heading(3),
+          heading_4 = heading(4),
+          heading_5 = heading(5),
+          heading_6 = heading(6),
+        },
+      }
     end,
   },
 }
