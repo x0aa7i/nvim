@@ -19,7 +19,6 @@ return {
       "nvim-lua/plenary.nvim",
     },
     keys = {
-      { "<leader>n", "", desc = "+obsidian" },
       { "<leader>nd", "<cmd>ObsidianDailies<CR>", desc = "Daily notes" },
       { "<leader>nn", "<cmd>ObsidianNew<cr>", desc = "New note" },
       { "<leader>nj", "<cmd>ObsidianToday<CR>", desc = "Today note" },
@@ -128,6 +127,14 @@ return {
           ["!"] = { char = "󰩳", hl_group = "Error" },
           ["%?"] = { char = "󰞋", hl_group = "Added" },
         },
+      },
+    },
+  },
+  {
+    "folke/which-key.nvim",
+    opts = {
+      spec = {
+        { "<leader>n", group = "obsidian", icon = "" },
       },
     },
   },
