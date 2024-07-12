@@ -8,40 +8,6 @@ return {
       keys[#keys + 1] = { "K", false }
     end,
   },
-  { -- better statuscolumn
-    "luukvbaal/statuscol.nvim",
-    event = { "LazyFile" },
-    config = function()
-      local builtin = require("statuscol.builtin")
-      require("statuscol").setup({
-        ft_ignore = {
-          "neo-tree",
-          "neo-tree-popup",
-          "alpha",
-          "dashboard",
-          "lazy",
-          "mason",
-          "noice",
-          "toggleterm",
-        },
-        relculright = true, -- whether to right-align the cursor line number with 'relativenumber' set
-        segments = {
-          {
-            sign = { name = { "Diagnostic*" }, text = { ".*" }, maxwidth = 1, colwidth = 2, auto = false },
-            click = "v:lua.ScSa",
-          },
-          {
-            -- line number
-            text = { builtin.lnumfunc, " " },
-            condition = { true, builtin.not_empty },
-            click = "v:lua.ScLa",
-          },
-          { text = { builtin.foldfunc, " " }, click = "v:lua.ScFa" },
-        },
-      })
-    end,
-  },
-
   { -- better fold
     "kevinhwang91/nvim-ufo",
     event = { "BufRead", "BufNewFile" },
