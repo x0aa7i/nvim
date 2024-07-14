@@ -76,10 +76,14 @@ return {
       swap = {
         enable = true,
         swap_next = {
-          ["<leader>m"] = "@parameter.inner",
+          [">a"] = { query = "@parameter.inner", desc = "Swap next parameter" },
+          [">f"] = { query = "@function.outer", desc = "Swap next function" },
+          [">b"] = { query = "@block.outer", desc = "Swap next block" },
         },
         swap_previous = {
-          ["<leader>M"] = "@parameter.inner",
+          ["<a"] = { query = "@parameter.inner", desc = "Swap previous parameter" },
+          ["<f"] = { query = "@function.outer", desc = "Swap previous function" },
+          ["<b"] = { query = "@block.outer", desc = "Swap previous block" },
         },
       },
     },
