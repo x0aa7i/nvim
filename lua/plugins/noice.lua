@@ -16,6 +16,8 @@ return {
             { event = "msg_show", find = "%d+ change" },
             { event = "msg_show", find = "%d+ line" },
             { event = "msg_show", find = "%d+ more line" },
+            { event = "notify", find = "completion request failed" }, -- Codeium
+            { event = "notify", find = "No information available" }, -- Hover doc
           },
         },
       },
@@ -31,11 +33,6 @@ return {
             { event = "notify", find = "All parsers are up%-to%-date" },
           },
         },
-      },
-      {
-        -- Svelte LSP
-        opts = { lang = "svelte", skip = true },
-        filter = { event = "notify", find = "No information available" },
       },
     })
   end,
