@@ -31,6 +31,9 @@ return {
 
     local cmp = require("cmp")
 
+    opts.experimental = opts.experimental or {}
+    opts.experimental.ghost_text = false
+
     opts.mapping = vim.tbl_extend("force", opts.mapping, {
       ["<C-j>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
