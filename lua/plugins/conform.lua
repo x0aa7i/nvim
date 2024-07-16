@@ -3,20 +3,23 @@ return {
   opts = {
     formatters_by_ft = {
       ["css"] = { "prettierd" },
-      ["graphql"] = { "prettierd" },
       ["html"] = { "prettierd" },
-      ["javascript"] = { "eslint_d", "prettierd" },
-      ["javascriptreact"] = { "eslint_d", "prettierd" },
+
+      ["svelte"] = { "prettierd" },
+      ["javascript"] = { "prettierd" },
+      ["javascriptreact"] = { "prettierd" },
+      ["typescript"] = { "prettierd" },
+      ["typescriptreact"] = { "prettierd" },
+
+      ["less"] = { "prettierd" },
+      ["scss"] = { "prettierd" },
+
       ["json"] = { "prettierd" },
       ["jsonc"] = { "prettierd" },
-      ["less"] = { "prettierd" },
+
       ["markdown"] = { "prettierd", "markdownlint" },
       ["markdown.mdx"] = { "prettierd", "markdownlint" },
-      ["scss"] = { "prettierd" },
-      ["svelte"] = { "eslint_d", "prettierd" },
-      ["typescript"] = { "eslint_d", "prettierd" },
-      ["typescriptreact"] = { "eslint_d", "prettierd" },
-      ["vue"] = { "eslint_d", "prettierd" },
+
       ["yaml"] = { "prettierd" },
     },
   },
