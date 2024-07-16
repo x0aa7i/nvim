@@ -1,102 +1,50 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
-    keys = {
-      {
-        "<leader><space>",
-        function()
-          require("telescope").extensions.smart_open.smart_open({ match_algorithm = "fzf" })
-        end,
-        desc = "Find Frequent Files (Root Dir)",
-      },
-    },
-    opts = {
-      defaults = {
-        layout_strategy = "flex", -- Flex layout swaps between `horizontal` and `vertical` strategies based on the window width
-        layout_config = {
-          prompt_position = "bottom",
-          vertical = {
-            preview_height = 0.5,
-          },
-        },
-        sorting_strategy = "ascending",
-        cycle_layout_list = { "horizontal", "vertical" },
-        prompt_prefix = "   ",
-        selection_caret = " ",
-        winblend = 0,
-        file_ignore_patterns = {
-          ".git/",
-          ".vscode/",
-          ".obsidian/",
-          "node_modules/",
-          "build/",
-          "package-lock.json",
-          "pnpm-lock.yaml",
-          "%.sqlite3",
-          "%.jpg",
-          "%.jpeg",
-          "%.png",
-          "%.svg",
-          "%.otf",
-          "%.ttf",
-          "%.webp",
-          "%.gif",
-          "%.mp4",
-          "%.webm",
-          "%.mkv",
-          "%.webm",
-          "%.exe",
-          "%.zip",
-          "%.7z",
-          "%.rar",
-          "%.tar",
-          "%.pdf",
-          "%.epub",
-        },
-        mappings = {
-          i = { -- Insert Mode mapping
-            ["<C-Right>"] = require("telescope.actions.layout").cycle_layout_next, -- Cycle history next: CTRL + Right
-            ["<C-Left>"] = require("telescope.actions.layout").cycle_layout_prev, -- Cycle history previous: CTRL + Left
-            ["<C-j>"] = require("telescope.actions").move_selection_next, -- scroll the list with <c-j>
-            ["<C-k>"] = require("telescope.actions").move_selection_previous, -- scroll the list with <c-k>
-            ["<C-u>"] = require("telescope.actions").preview_scrolling_up,
-            ["<C-d>"] = require("telescope.actions").preview_scrolling_down,
-          },
-        },
-      },
-    },
-  },
-  {
-    "danielfalk/smart-open.nvim",
-    event = "LazyFile",
-    branch = "0.2.x",
     dependencies = {
-      "kkharji/sqlite.lua",
+      "debugloop/telescope-undo.nvim",
+      "nvim-lua/plenary.nvim", -- telescope undo dependency
+      {
+        "danielfalk/smart-open.nvim",
+        branch = "0.2.x",
+        dependencies = { "kkharji/sqlite.lua" },
+      },
     },
-    config = function()
-      local telescope = require("telescope")
-      telescope.load_extension("smart_open")
-
-      telescope.setup({
-        extensions = {
-          smart_open = {
-            cwd_only = true,
-            match_algorithm = "fzf",
-          },
-        },
-      })
-    end,
-  },
-  {
-    "debugloop/telescope-undo.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim" },
     keys = {
-      { "<leader>su", "<cmd>Telescope undo<cr>", desc = "Undos" },
+      { "<leader><space>", "<cmd>Telescope smart_open<cr>", desc = "Smart Open" },
+      { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
+      { "<leader>fu", "<cmd>Telescope undo<cr>", desc = "Undos" },
     },
-    config = function()
+    opts = function(_, opts)
+      opts.defaults = opts.defaults or {}
+      opts.defaults.layout_strategy = "flex"
+      opts.defaults.layout_config = {
+        prompt_position = "bottom",
+        vertical = {
+          preview_height = 0.5,
+        },
+      }
+      opts.defaults.sorting_strategy = "ascending"
+      opts.defaults.cycle_layout_list = { "horizontal", "vertical" }
+      opts.defaults.prompt_prefix = "   "
+      opts.defaults.selection_caret = " "
+      opts.defaults.winblend = 0
+      opts.defaults.mappings.i = vim.tbl_deep_extend("force", opts.defaults.mappings.i or {}, {
+        ["<C-Right>"] = require("telescope.actions.layout").cycle_layout_next,
+        ["<C-Left>"] = require("telescope.actions.layout").cycle_layout_prev,
+        ["<C-j>"] = require("telescope.actions").move_selection_next,
+        ["<C-k>"] = require("telescope.actions").move_selection_previous,
+        ["<C-u>"] = require("telescope.actions").preview_scrolling_up,
+        ["<C-d>"] = require("telescope.actions").preview_scrolling_down,
+      })
+
       LazyVim.on_load("telescope.nvim", function()
         require("telescope").setup({
           extensions = {
+            smart_open = {
+              cwd_only = true,
+              match_algorithm = "fzf",
+            },
             undo = {
               side_by_side = true,
               layout_strategy = "vertical",
@@ -106,6 +54,8 @@ return {
             },
           },
         })
+
+        require("telescope").load_extension("smart_open")
         require("telescope").load_extension("undo")
       end)
     end,
