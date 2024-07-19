@@ -21,23 +21,6 @@ return {
     },
     -- stylua: ignore end
     -- Specifies code to run before this plugin is loaded.
-    init = function()
-      vim.o.foldcolumn = "auto"
-      vim.o.foldlevel = 99 -- Using ufo provider need a large value
-      vim.o.foldlevelstart = 99
-      vim.o.foldnestmax = 0
-      vim.o.foldenable = true
-      vim.o.foldmethod = "indent"
-
-      vim.opt.fillchars = {
-        fold = " ",
-        foldopen = "",
-        foldsep = " ",
-        foldclose = "",
-        stl = " ",
-        eob = " ",
-      }
-    end,
     opts = function()
       local handler = function(virtText, lnum, endLnum, width, truncate)
         local newVirtText = {}
