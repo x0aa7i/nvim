@@ -31,6 +31,7 @@ return {
           return branch ~= "main" and branch ~= "master"
         end,
       },
+      { "grapple" },
     }
 
     table.insert(opts.sections.lualine_c, { "filesize", color = { fg = "#737aa2" } })
