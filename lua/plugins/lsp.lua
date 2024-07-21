@@ -6,43 +6,6 @@ return {
     },
     opts = function(_, opts)
       opts.servers = opts.servers or {}
-      ----@type lspconfig.options.tailwindcss
-      opts.servers.tailwindcss = {
-        settings = {
-          tailwindCSS = {
-            experimental = {
-              classRegex = {
-                -- Custom class name attributes (e.g. buttonClassName)
-                { [==[[a-zA-Z]*ClassName=["'`]([^"'`]+)["'`]]==] },
-                -- cls, clsx
-                -- https://github.com/tailwindlabs/tailwindcss-intellisense/issues/682#issuecomment-1364585313
-                {
-                  [[cn\(([^)(]*(?:\([^)(]*(?:\([^)(]*(?:\([^)(]*\)[^)(]*)*\)[^)(]*)*\)[^)(]*)*)\)]],
-                  '"(.*?)"',
-                },
-                -- Tailwind Variants
-                -- https://www.tailwind-variants.org/docs/getting-started#intellisense-setup-optional
-                {
-                  [[tv\(([^)(]*(?:\([^)(]*(?:\([^)(]*(?:\([^)(]*\)[^)(]*)*\)[^)(]*)*\)[^)(]*)*)\)]],
-                  '"(.*?)"',
-                },
-                -- `styles` objects
-                -- https://github.com/tailwindlabs/tailwindcss-intellisense/issues/682#issuecomment-1364585313
-                { [[styles =([^}]*)\}]], [==[["'`]([^"'`]*).*?["'`]]==] },
-              },
-            },
-          },
-        },
-      }
-
-      -- Capabilities
-      opts.capabilities = {
-        workspace = {
-          -- PERF: didChangeWatchedFiles is too slow.
-          -- TODO: Remove this when https://github.com/neovim/neovim/issues/23291#issuecomment-1686709265 is fixed.
-          didChangeWatchedFiles = { dynamicRegistration = false },
-        },
-      }
 
       -- Inlay hints
       opts.inlay_hints = opts.inlay_hints or {}
