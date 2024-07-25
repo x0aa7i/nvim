@@ -24,10 +24,9 @@ local base_configs = {
 }
 
 local groq_configs = {
-  model = "llama3-70b-8192",
-  -- model = "mixtral-8x7b-32768",
-  body = { max_tokens = nil, temperature = 1, top_p = 1, stop = nil },
-  command = function(options)
+  model = "llama-3.1-70b-versatile",
+  body = { max_tokens = nil, temperature = 0.8, top_p = 1, stop = nil },
+  command = function()
     local api_url = "https://api.groq.com"
     local api_endpoint = api_url .. "/openai/v1/chat/completions"
     local api_key_path = "~/.groq/creds"
@@ -51,7 +50,7 @@ local ollama_configs = {
   -- This can also be a command string.
   -- The executed command must return a JSON object with { response, context }
   -- (context property is optional).
-  init = function(options)
+  init = function()
     pcall(io.popen, "ollama serve > /dev/null 2>&1 &")
   end,
 }
@@ -61,61 +60,82 @@ return {
     "David-Kunz/gen.nvim",
     keys = {
       { "<leader>a", "", mode = { "n", "v" }, desc = "+ai" },
-      { "<leader>aa", ":Gen<cr>", mode = "n", desc = "Gen" },
-      { "<leader>aa", ":Gen Generate_Selection<cr>", mode = "v", desc = "Generate" },
-      { "<leader>am", ":Gen Summarize<cr>", mode = "v", desc = "Summarize" },
-      { "<leader>ar", ":Gen Rewrite<cr>", mode = "v", desc = "Rewrite" },
-      { "<leader>ac", ":Gen Comment<cr>", mode = "v", desc = "Comment" },
+      { "<leader>aa", ":Gen Ask_Code<cr>", mode = "v", desc = "Ask About Code" },
+      { "<leader>aA", ":Gen Ask<cr>", mode = "v", desc = "Ask About Text" },
+
+      { "<leader>ag", ":Gen Generate_Input<cr>", mode = "n", desc = "Generate from input" },
+      { "<leader>ag", ":Gen Generate_Selection<cr>", mode = "v", desc = "Generate from Selection" },
+
       { "<leader>ae", ":Gen Enhance_Grammar_Spelling<cr>", mode = "v", desc = "Enhance Grammar and Spelling" },
-      { "<leader>as", ":Gen Make_Concise<cr>", mode = "v", desc = "Make Concise" },
-      { "<leader>ag", ":Gen Generate<cr>", mode = "v", desc = "Generate" },
+      { "<leader>ar", ":Gen Rewrite<cr>", mode = "v", desc = "Rewrite Text" },
+      { "<leader>as", ":Gen Make_Concise<cr>", mode = "v", desc = "Make Text Concise" },
+      { "<leader>az", ":Gen Summarize<cr>", mode = "v", desc = "Summarize Text" },
+
+      { "<leader>ah", ":Gen Enhance_Code<cr>", mode = "v", desc = "Enhance Code" },
+      { "<leader>ad", ":Gen JSDoc<cr>", mode = "v", desc = "Write JSDoc" },
       { "<leader>af", ":Gen Fix_Code<cr>", mode = "v", desc = "Fix Code" },
-      { "<leader>aw", ":Gen Enhance_Wording<cr>", mode = "v", desc = "Enhance Wording" },
+      { "<leader>an", ":Gen Change_Code<cr>", mode = "v", desc = "Change Code" },
+      { "<leader>at", ":Gen Write_Tests<cr>", mode = "v", desc = "Write Tests" },
+      { "<leader>ac", ":Gen Commit_Message<cr>", mode = "n", desc = "Commit Message" },
     },
     config = function()
       local gen = require("gen")
 
       gen.prompts = {
-        Generate = { prompt = "$input, keep the output short.", replace = true },
-        Generate_Selection = { prompt = "$text, keep the output short.", replace = true },
-        Summarize = { prompt = "Summarize the following text:\n$text" },
         Ask = { prompt = "Regarding the following text, $input:\n$text" },
+        Ask_Code = { prompt = "Regarding the following code, $input:\n$text" },
+        Generate_Input = { prompt = "$input\nProvide a concise response." },
+        Generate_Selection = { prompt = "$text\nProvide a concise response." },
+        Summarize = { prompt = "Provide a concise summary of the following text:\n$text" },
         Rewrite = {
-          prompt = "Rewrite the following text to improve grammar and readability, just output the final text only without additional quotes around it:\n$text",
+          prompt = "Improve the grammar and readability of the following text. Output only the refined text without quotes:\n$text",
           replace = true,
-        },
-        Comment = {
-          prompt = "Explain the following code snippet and write it as a comment, just output the final text without additional quotes around it:\n$text",
         },
         Enhance_Grammar_Spelling = {
-          prompt = "Modify the following text to improve grammar and spelling, just output the final text only and without additional quotes around it:\n$text",
-          replace = true,
-        },
-        Enhance_Wording = {
-          prompt = "Modify the following text to use better wording, just output the final text without additional quotes around it:\n$text",
+          prompt = "Correct and enhance the grammar and spelling in the following text. Output only the improved text without quotes:\n$text",
           replace = true,
         },
         Make_Concise = {
-          prompt = "Modify the following text to make it as simple and concise as possible, just output the final text without additional quotes around it:\n$text",
+          prompt = "Condense the following text to its essential points, maintaining clarity. Output only the concise version without quotes:\n$text",
           replace = true,
         },
-        Review_Code = {
-          prompt = "Review the following code and make concise suggestions:\n```$filetype\n$text\n```",
-        },
         Enhance_Code = {
-          prompt = "Enhance the following code, only output the result in format ```$filetype\n...\n```:\n```$filetype\n$text\n```",
+          prompt = "Optimize and improve the following code. Consider performance, readability, and best practices. Output only the enhanced code in the format ```$filetype\n...\n```:\n```$filetype\n$text\n```",
           replace = true,
           extract = "```$filetype\n(.-)```",
         },
         Change_Code = {
-          prompt = "Regarding the following code, $input, only output the result in format ```$filetype\n...\n```:\n```$filetype\n$text\n```",
+          prompt = "Modify the following code according to this instruction: $input. Output only the result in the format ```$filetype\n...\n```:\n```$filetype\n$text\n```",
           replace = true,
           extract = "```$filetype\n(.-)```",
         },
         Fix_Code = {
-          prompt = "Fix the following code. Only ouput the result in format ```$filetype\n...\n```:\n```$filetype\n$text\n```",
+          prompt = "Identify and fix any issues in the following code. Output only the corrected code in the format ```$filetype\n...\n```:\n```$filetype\n$text\n```",
           replace = true,
           extract = "```$filetype\n(.-)```",
+        },
+        Review_Code = {
+          prompt = "Conduct a code review for the following snippet, focusing on best practices, potential improvements, and any issues:\n```$filetype\n$text\n```",
+        },
+        Write_Tests = {
+          prompt = "Generate unit tests for the following code. Do not include mocks. Output only the tests in the format ```$filetype\n...\n```:\n```$filetype\n$text\n```",
+        },
+        JSDoc = {
+          prompt = "Generate comprehensive JSDoc comments for the following code:\n```$filetype\n$text\n```",
+        },
+        Commit_Message = {
+          prompt = function(content, filetype)
+            local git_diff = vim.fn.system({ "git", "diff", "--staged" })
+
+            if not git_diff:match("^diff") then
+              error("Git error:\n" .. git_diff)
+            end
+
+            return "Compose a concise commit message following the Conventional Commits specification. Aim for under 80 characters. Respond ONLY with the commit message. Staged git diff:\n```"
+              .. git_diff
+              .. "\n```"
+          end,
+          replace = false,
         },
       }
 
