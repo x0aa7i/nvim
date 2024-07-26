@@ -38,6 +38,8 @@ return {
       H.CursorLine = { bg = "#212231" }
       H.CursorLineNr = { fg = C.magenta }
       H.SatelliteBar = { bg = C.terminal_black } -- scrollbar
+
+      H.RenderMarkdownDash = { fg = C.terminal_black }
     end
   end,
 }
