@@ -1,12 +1,14 @@
 return {
-  "MeanderingProgrammer/markdown.nvim",
+  "MeanderingProgrammer/render-markdown.nvim",
   opts = {
     file_types = { "markdown", "norg", "rmd", "org" },
+    latex = { enabled = false },
     code = {
       sign = false,
       width = "block",
       right_pad = 2,
       left_pad = 2,
+      position = "right",
     },
     heading = {
       sign = false,
