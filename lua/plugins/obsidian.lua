@@ -116,6 +116,7 @@ return {
       },
 
       ui = {
+        enable = false, -- Handeled by markdown.nvim
         checkboxes = {
           -- NOTE: the 'char' value has to be a single character, and the highlight groups are defined below.
           [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
