@@ -47,6 +47,11 @@ map("n", "<leader>wq", "<C-W>c", { desc = "Delete Window", remap = true })
 map("n", "<leader>ws", "<C-W>s", { desc = "Split Window Below", remap = true })
 map("n", "<leader>wv", "<C-W>v", { desc = "Split Window Right", remap = true })
 
+-- tabs
+map("n", "<leader><tab>q", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+map("n", "]<tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+map("n", "[<tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+
 -- Comment
 vim.keymap.del("n", "<c-/>") -- Remove terminal keybind
 map("n", "<c-/>", "gcc", { desc = "comment toggle", remap = true })
