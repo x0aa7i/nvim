@@ -6,7 +6,7 @@ return {
   },
   opts = {
     adapters = {
-      ["neotest-playwright"] = {},
+      -- ["neotest-playwright"] = {},
       ["neotest-vitest"] = {},
     },
     output_panel = {

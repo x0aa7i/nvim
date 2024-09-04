@@ -13,7 +13,7 @@ return {
       javascript = { "eslint_d" },
       typescript = { "eslint_d" },
       svelte = { "eslint_d" },
-      markdown = { "markdownlint" },
+      -- markdown = { "markdownlint" },
     },
     linters = {
       markdownlint = {
