@@ -1,23 +1,24 @@
 return {
   "yetone/avante.nvim",
   event = "VeryLazy",
-  version = "*",
-  build = "make",
+  build = LazyVim.is_win() and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" or "make",
   dependencies = {
-    "HakonHarnes/img-clip.nvim",
-    "stevearc/dressing.nvim",
-    "nvim-lua/plenary.nvim",
-    "MunifTanjim/nui.nvim",
-    --- The below is optional, make sure to setup it properly if you have lazy=true
     {
       "MeanderingProgrammer/render-markdown.nvim",
-      opts = {
-        file_types = { "markdown", "Avante" },
-      },
-      ft = { "markdown", "Avante" },
+      optional = true,
+      opts = function(_, opts)
+        opts.file_types = vim.list_extend(opts.file_types or {}, { "Avante" })
+      end,
+      ft = function(_, ft)
+        vim.list_extend(ft, { "Avante" })
+      end,
     },
   },
+  init = function()
+    require("avante_lib").load()
+  end,
   opts = {
+    windows = { width = 45 },
     provider = "groq",
     vendors = {
       groq = {
