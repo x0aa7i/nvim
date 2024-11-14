@@ -63,9 +63,8 @@ map("v", "<c-/>", "gc", { desc = "comment toggle", remap = true })
 
 -- Terminal
 -- stylua: ignore
-local lazyterm = function() LazyVim.terminal(nil, { cwd = LazyVim.root() }) end
-map("n", "<c-\\>", lazyterm, { desc = "Terminal (Root Dir)" })
-map("t", "<c-\\>", "<cmd>close<cr>", { desc = "Hide Terminal" })
+local terminal = function() Snacks.terminal.toggle() end
+map({ "n", "t" }, "<c-\\>", terminal, { desc = "Terminal (Root Dir)" })
 
 -- Google search
 local searching_google_in_visual =
