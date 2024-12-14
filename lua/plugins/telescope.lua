@@ -2,8 +2,8 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
-      "debugloop/telescope-undo.nvim",
-      "nvim-lua/plenary.nvim", -- telescope undo dependency
+      -- "debugloop/telescope-undo.nvim",
+      -- "nvim-lua/plenary.nvim", -- telescope undo dependency
       {
         "danielfalk/smart-open.nvim",
         branch = "0.2.x",
@@ -13,7 +13,7 @@ return {
     keys = {
       { "<leader><space>", "<cmd>Telescope smart_open<cr>", desc = "Smart Open" },
       { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
-      { "<leader>fu", "<cmd>Telescope undo<cr>", desc = "Undos" },
+      -- { "<leader>fu", "<cmd>Telescope undo<cr>", desc = "Undos" },
     },
     opts = function(_, opts)
       opts.defaults = opts.defaults or {}
@@ -36,6 +36,7 @@ return {
         ["<C-k>"] = require("telescope.actions").move_selection_previous,
         ["<C-u>"] = require("telescope.actions").preview_scrolling_up,
         ["<C-d>"] = require("telescope.actions").preview_scrolling_down,
+        ["<ESC>"] = require("telescope.actions").close,
       })
 
       LazyVim.on_load("telescope.nvim", function()
@@ -45,18 +46,18 @@ return {
               cwd_only = true,
               match_algorithm = "fzf",
             },
-            undo = {
-              side_by_side = true,
-              layout_strategy = "vertical",
-              layout_config = {
-                preview_height = 0.6,
-              },
-            },
+            -- undo = {
+            --   side_by_side = true,
+            --   layout_strategy = "vertical",
+            --   layout_config = {
+            --     preview_height = 0.6,
+            --   },
+            -- },
           },
         })
 
         require("telescope").load_extension("smart_open")
-        require("telescope").load_extension("undo")
+        -- require("telescope").load_extension("undo")
       end)
     end,
   },

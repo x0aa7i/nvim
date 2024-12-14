@@ -1,6 +1,5 @@
 return {
   "sontungexpt/url-open",
-  event = "VeryLazy",
   cmd = "URLOpenUnderCursor",
   keys = {
     {

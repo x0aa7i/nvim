@@ -3,16 +3,16 @@ local use_local = false
 local base_configs = {
   quit_map = "q", -- set keymap for close the response window
   retry_map = "<c-r>", -- set keymap to re-send the current prompt
-  -- list_models = '<omitted lua function>', -- Retrieves a list of model names
-  display_mode = "float", -- The display mode. Can be "float" or "split".
+  display_mode = "split", -- The display mode. Can be "float" or "split".
   show_prompt = false, -- Shows the prompt submitted to Ollama.
   show_model = false, -- Displays which model you are using at the beginning of your chat session.
   no_auto_close = false, -- Never closes the window automatically.
+  hidden = false, -- Hide the generation window (if true, will implicitly set `prompt.replace = true`), requires Neovim >= 0.10
   debug = false, -- Prints errors and the command which is run.
 }
 
 local groq_configs = {
-  model = "llama-3.1-70b-versatile",
+  model = "llama-3.3-70b-versatile",
   body = { max_tokens = nil, temperature = 0.8, top_p = 1, stop = nil },
   command = function()
     local api_endpoint = "https://api.groq.com/openai/v1/chat/completions"
@@ -43,8 +43,8 @@ local ollama_configs = {
 
 return {
   "David-Kunz/gen.nvim",
+  cmd = { "Gen" },
   keys = {
-    { "<leader>a", "", mode = { "n", "v" }, desc = "+ai" },
     { "<leader>ag", ":Gen Generate_Input<cr>", mode = "n", desc = "Generate from Input" },
     { "<leader>ag", ":Gen Generate_Selection<cr>", mode = "v", desc = "Generate from Selection" },
 
@@ -86,24 +86,23 @@ return {
       },
       Enhance_Code = {
         prompt = "Optimize and improve the following code. Consider performance, readability, and best practices. Output only the enhanced code in the format ```$filetype\n...\n```:\n```$filetype\n$text\n```",
-        replace = true,
         extract = "```$filetype\n(.-)```",
       },
       Change_Code = {
         prompt = "Modify the following code according to this instruction: $input. Output only the result in the format ```$filetype\n...\n```:\n```$filetype\n$text\n```",
-        replace = true,
         extract = "```$filetype\n(.-)```",
       },
       Fix_Code = {
         prompt = "Identify and fix any issues in the following code. Output only the corrected code in the format ```$filetype\n...\n```:\n```$filetype\n$text\n```",
-        replace = true,
         extract = "```$filetype\n(.-)```",
       },
       Write_Tests = {
         prompt = "Generate unit tests for the following code using vitest library. Do not include mocks. Output only the tests in the format ```$filetype\n...\n```:\n```$filetype\n$text\n```",
+        extract = "```$filetype\n(.-)```",
       },
       JSDoc = {
         prompt = "Generate concise JSDoc comments for the following code. Output only the comments: \n```$filetype\n$text\n```",
+        extract = "```$filetype\n(.-)```",
       },
     }
 

@@ -9,6 +9,7 @@ return {
         "DressingInput",
         "TelescopePrompt",
         "alpha",
+        "snacks_dashboard",
         "dashboard",
         "toggleterm",
         "noice",

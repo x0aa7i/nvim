@@ -10,6 +10,7 @@ return {
   },
   { -- better fold
     "kevinhwang91/nvim-ufo",
+    enabled = false,
     event = { "BufRead", "BufNewFile" },
     dependencies = { "kevinhwang91/promise-async" },
   -- stylua: ignore start

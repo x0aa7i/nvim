@@ -1,6 +1,7 @@
 return {
   {
     "sindrets/diffview.nvim",
+    enabled = false,
     cmd = { "DiffviewFileHistory", "DiffviewOpen" },
     keys = {
       { "<leader>gd", "<cmd>DiffviewOpen<CR>", desc = "Diff View" },
@@ -48,6 +49,7 @@ return {
   },
   {
     "folke/which-key.nvim",
+    optional = true,
     opts = {
       spec = {
         { "<leader>gC", group = "conflicts" },

@@ -51,6 +51,11 @@ map("n", "<leader>wq", "<C-W>c", { desc = "Delete Window", remap = true })
 map("n", "<leader>ws", "<C-W>s", { desc = "Split Window Below", remap = true })
 map("n", "<leader>wv", "<C-W>v", { desc = "Split Window Right", remap = true })
 
+-- Buffers
+map("n", "Q", function()
+  Snacks.bufdelete()
+end, { desc = "Delete Buffer" })
+
 -- tabs
 map("n", "<leader><tab>q", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "]<tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })

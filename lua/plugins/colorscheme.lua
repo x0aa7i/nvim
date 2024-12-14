@@ -14,9 +14,6 @@ return {
       colors.red = "#f7768e"
       colors.red1 = "#db4b4b"
       colors.green = "#22d0a2"
-      -- colors.green1 = "#73daca"
-      -- colors.green2 = "#41a6b5"
-      -- colors.teal = "#1abc9c"
       colors.magenta = "#9381ff"
       colors.border_highlight = colors.magenta
     end
@@ -37,6 +34,8 @@ return {
 
       H.CursorLine = { bg = "#212231" }
       H.CursorLineNr = { fg = C.magenta }
+      H.IblIndent = { fg = C.bg_light } -- indent guide
+      H.SnacksIndent = { fg = C.bg_light } -- indent guide
       H.SatelliteBar = { bg = C.terminal_black } -- scrollbar
 
       H.RenderMarkdownDash = { fg = C.terminal_black }
