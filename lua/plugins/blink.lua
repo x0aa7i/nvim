@@ -9,15 +9,16 @@ return {
       ["<C-U>"] = { "scroll_documentation_up", "fallback" },
       ["<C-D>"] = { "scroll_documentation_down", "fallback" },
     },
-    -- sources = {
-    --   providers = {
-    --     codeium = {
-    --       name = "codeium",
-    --       module = "blink.compat.source",
-    --       kind = "Codeium",
-    --       max_item = 3,
-    --     },
-    --   },
-    -- },
+    sources = {
+      compat = { "codeium" },
+      providers = {
+        codeium = {
+          kind = "Codeium",
+          score_offset = 100,
+          async = true,
+          max_items = 3,
+        },
+      },
+    },
   },
 }

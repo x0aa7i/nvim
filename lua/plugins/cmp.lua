@@ -1,7 +1,9 @@
 return {
   "hrsh7th/nvim-cmp",
+  enabled = true,
   dependencies = {
     { "octaltree/cmp-look", ft = { "markdown", "text" } }, -- dictionary
+    "xzbdmw/colorful-menu.nvim",
   },
   keys = {
     {
@@ -33,6 +35,43 @@ return {
 
     opts.experimental = opts.experimental or {}
     opts.experimental.ghost_text = false
+
+    opts.formatting = {
+      fields = { "kind", "abbr", "menu" },
+      format = function(entry, item)
+        local completion_item = entry:get_completion_item()
+        local highlights_info = require("colorful-menu").highlights(completion_item, vim.bo.filetype)
+
+        -- error, such as missing parser, fallback to use raw label.
+        if highlights_info == nil then
+          item.abbr = completion_item.label
+        else
+          item.abbr_hl_group = highlights_info.highlights
+          item.abbr = highlights_info.text
+        end
+
+        local icons = LazyVim.config.icons.kinds
+        -- item.menu = item.kind
+
+        if icons[item.kind] then
+          -- item.kind = icons[item.kind] .. item.kind
+          item.kind = icons[item.kind]:gsub("%s+$", "") .. " "
+        end
+
+        local widths = {
+          abbr = vim.g.cmp_widths and vim.g.cmp_widths.abbr or 50,
+          menu = vim.g.cmp_widths and vim.g.cmp_widths.menu or 30,
+        }
+
+        for key, width in pairs(widths) do
+          if item[key] and vim.fn.strdisplaywidth(item[key]) > width then
+            item[key] = vim.fn.strcharpart(item[key], 0, width - 1) .. "…"
+          end
+        end
+
+        return item
+      end,
+    }
 
     opts.mapping = vim.tbl_extend("force", opts.mapping, {
       ["<C-j>"] = cmp.mapping(function(fallback)

@@ -6,6 +6,8 @@ vim.opt.linebreak = true
 vim.opt.breakindent = true -- Every wrapped line will continue visually indented
 vim.opt.breakindentopt = "list:-1"
 
+vim.opt.pumblend = 0 -- make popup menu transparent, value range [0,100]
+
 -- fold
 vim.o.foldcolumn = "auto"
 vim.o.foldlevel = 99
