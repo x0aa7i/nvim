@@ -39,13 +39,8 @@ return {
     opts.formatting = {
       fields = { "kind", "abbr", "menu" },
       format = function(entry, item)
-        local completion_item = entry:get_completion_item()
-        local highlights_info = require("colorful-menu").highlights(completion_item, vim.bo.filetype)
-
-        -- error, such as missing parser, fallback to use raw label.
-        if highlights_info == nil then
-          item.abbr = completion_item.label
-        else
+        local highlights_info = require("colorful-menu").cmp_highlights(entry)
+        if highlights_info ~= nil then
           item.abbr_hl_group = highlights_info.highlights
           item.abbr = highlights_info.text
         end
