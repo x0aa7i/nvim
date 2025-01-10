@@ -11,12 +11,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      -- { "artemave/workspace-diagnostics.nvim", opts = {} },
-      -- {
-      --   "dmmulroy/ts-error-translator.nvim",
-      --   config = true,
-      --   ft = ts_filetypes,
-      -- },
       {
         "dmmulroy/tsc.nvim",
         opts = {
@@ -40,7 +34,14 @@ return {
       },
     },
     opts = function(_, opts)
-      -- opts.servers = opts.servers or {}
+      opts.servers = opts.servers or {}
+      opts.servers.cssls = {
+        settings = {
+          css = {
+            lint = { unknownAtRules = "ignore" },
+          },
+        },
+      }
 
       -- Inlay hints
       opts.inlay_hints = opts.inlay_hints or {}
