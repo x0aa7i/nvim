@@ -50,13 +50,26 @@ return {
           item.abbr = highlights_info.text
         end
 
-        local icons = LazyVim.config.icons.kinds
-        -- item.menu = item.kind
+        local color = entry.completion_item.documentation
+        if color and type(color) == "string" and color:match("^#%x%x%x%x%x%x$") then
+          local hl = "hex-" .. color:sub(2)
 
-        if icons[item.kind] then
-          -- item.kind = icons[item.kind] .. item.kind
-          item.kind = icons[item.kind]:gsub("%s+$", "") .. " "
+          if #vim.api.nvim_get_hl(0, { name = hl }) == 0 then
+            vim.api.nvim_set_hl(0, hl, { fg = color })
+          end
+
+          item.kind = ""
+          item.kind_hl_group = hl
+        else
+          local icons = LazyVim.config.icons.kinds
+
+          if icons[item.kind] then
+            -- item.kind = icons[item.kind] .. item.kind
+            item.kind = icons[item.kind]:gsub("%s+$", "") .. " "
+          end
         end
+
+        -- item.menu = item.kind
 
         local widths = {
           abbr = vim.g.cmp_widths and vim.g.cmp_widths.abbr or 50,
