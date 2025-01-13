@@ -34,6 +34,11 @@ return {
       },
     },
     opts = function(_, opts)
+      -- Inlay hints
+      opts.inlay_hints = opts.inlay_hints or {}
+      opts.inlay_hints.enabled = false
+
+      -- Servers configs
       opts.servers = opts.servers or {}
       opts.servers.cssls = {
         settings = {
@@ -42,24 +47,22 @@ return {
           },
         },
       }
-
-      -- Inlay hints
-      opts.inlay_hints = opts.inlay_hints or {}
-      opts.inlay_hints.enabled = false
-
-      -- Diagnostics
-      -- opts.diagnostics = opts.diagnostics or {}
-      -- opts.diagnostics.virtual_text = opts.diagnostics.virtual_text or {}
-      -- opts.diagnostics.virtual_text.prefix = "icons"
-
-      -- Code lens
-      -- opts.codelens = opts.codelens or {}
-      -- opts.codelens.enabled = false
-
-      -- Workspace diagnostics
-      -- LazyVim.lsp.on_attach(function(client, buffer)
-      --   require("workspace-diagnostics").populate_workspace_diagnostics(client, buffer)
-      -- end)
+      opts.servers.tailwindcss = {
+        filetypes_exclude = { "markdown" },
+        filetypes_include = {},
+        settings = {
+          tailwindCSS = {
+            experimental = {
+              classRegex = {
+                { "clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+                { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+                { "cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+                { "tv\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+              },
+            },
+          },
+        },
+      }
     end,
   },
   {
