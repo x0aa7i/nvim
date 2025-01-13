@@ -1,6 +1,6 @@
 return {
   "hrsh7th/nvim-cmp",
-  enabled = true,
+  enabled = false,
   dependencies = {
     { "octaltree/cmp-look", ft = { "markdown", "text" } }, -- dictionary
     "xzbdmw/colorful-menu.nvim",
