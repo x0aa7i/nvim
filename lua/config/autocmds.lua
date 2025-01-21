@@ -18,3 +18,14 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufReadPost" }, {
     vim.opt_local.iskeyword:remove("-")
   end,
 })
+
+-- Trim whitespaces
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  group = vim.api.nvim_create_augroup("trim_whitespaces", {}),
+  pattern = { "*" },
+  callback = function()
+    local save_cursor = vim.fn.getpos(".")
+    vim.cmd([[%s/\s\+$//e]])
+    vim.fn.setpos(".", save_cursor)
+  end,
+})
