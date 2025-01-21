@@ -130,6 +130,9 @@ return {
         "tailwindcss-language-server",
         "css-lsp",
         "json-lsp",
+        "markdownlint-cli2", -- markdown linter
+        "markdown-toc", -- markdown table of contents
+        "marksman", -- markdown lsp
         "harper-ls", -- grammar check
         "stylelint-lsp", -- css linter
         "emmet-language-server", -- css/html completions

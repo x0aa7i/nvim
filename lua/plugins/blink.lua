@@ -3,6 +3,8 @@ return {
   dependencies = {
     "xzbdmw/colorful-menu.nvim",
   },
+  ---@module 'blink.cmp'
+  ---@type blink.cmp.Config
   opts = {
     keymap = {
       preset = "enter",
@@ -15,9 +17,8 @@ return {
     completion = {
       menu = {
         draw = {
-          align_to = "label", -- 'label' or 'none' to disable, or 'cursor' to align to the cursor
-          -- We don't need label_description now because label and label_description are already
-          -- conbined together in label by colorful-menu.nvim.
+          align_to = "label",
+          treesitter = { "lsp" },
           columns = { { "kind_icon" }, { "label", gap = 1 } },
           components = {
             label = {
@@ -42,7 +43,13 @@ return {
       ghost_text = { enabled = false },
     },
     sources = {
-      compat = { "codeium" },
+      compat = {
+        "codeium",
+        "markdown",
+        "obsidian",
+        "obsidian_new",
+        "obsidian_tags",
+      },
       providers = {
         codeium = {
           kind = "Codeium",
@@ -50,6 +57,14 @@ return {
           async = true,
           max_items = 3,
         },
+        markdown = {
+          name = "RenderMarkdown",
+          module = "render-markdown.integ.blink",
+          fallbacks = { "lsp" },
+        },
+        obsidian = { name = "obsidian", module = "blink.compat.source" },
+        obsidian_new = { name = "obsidian_new", module = "blink.compat.source" },
+        obsidian_tags = { name = "obsidian_tags", module = "blink.compat.source" },
       },
     },
   },

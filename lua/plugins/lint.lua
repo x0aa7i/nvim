@@ -13,11 +13,11 @@ return {
       javascript = { "eslint_d" },
       typescript = { "eslint_d" },
       svelte = { "eslint_d" },
-      -- markdown = { "markdownlint" },
+      markdown = { "markdownlint-cli2" },
     },
     linters = {
-      markdownlint = {
-        args = { "--disable", "MD013", "--" },
+      ["markdownlint-cli2"] = {
+        args = { "--config", "~/.config/nvim/config/markdownlint.json" },
       },
     },
   },

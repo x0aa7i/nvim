@@ -19,19 +19,19 @@ return {
       "nvim-lua/plenary.nvim",
     },
     keys = {
-      { "<leader>nd", "<cmd>ObsidianDailies<CR>", desc = "Daily notes" },
-      { "<leader>nn", "<cmd>ObsidianNew<cr>", desc = "New note" },
-      { "<leader>nj", "<cmd>ObsidianToday<CR>", desc = "Today note" },
-      { "<leader>nt", "<cmd>ObsidianTemplate<CR>", desc = "Template" },
-      { "<leader>nb", "<cmd>ObsidianBacklinks<cr>", desc = "Backlinks" },
-      { "<leader>nl", "<cmd>ObsidianLink<cr>", desc = "Link selection" },
-      { "<leader>nf", "<cmd>ObsidianFollowLink<cr>", desc = "Follow link under cursor" },
-      { "<leader>ns", "<cmd>ObsidianSearch<cr>", desc = "Search" },
-      { "<leader>nr", "<cmd>ObsidianRename<cr>", desc = "Rename" },
-      { "<leader>nf", "<cmd>ObsidianQuickSwitch<cr>", desc = "Find" },
-      { "<leader>ng", "<cmd>ObsidianTags<cr>", desc = "Tags" },
-      { "<leader>nw", "<cmd>ObsidianWorkspace personal<cr>", desc = "Personal workspace" },
-      { "<leader>no", "<cmd>ObsidianOpen<cr>", desc = "Open in app" },
+      { "<leader>od", "<cmd>ObsidianDailies<CR>", desc = "Daily notes" },
+      { "<leader>on", "<cmd>ObsidianNew<cr>", desc = "New note" },
+      { "<leader>oj", "<cmd>ObsidianToday<CR>", desc = "Today note" },
+      { "<leader>ot", "<cmd>ObsidianTemplate<CR>", desc = "Template" },
+      { "<leader>ob", "<cmd>ObsidianBacklinks<cr>", desc = "Backlinks" },
+      { "<leader>ol", "<cmd>ObsidianLink<cr>", desc = "Link selection" },
+      { "<leader>of", "<cmd>ObsidianFollowLink<cr>", desc = "Follow link under cursor" },
+      { "<leader>os", "<cmd>ObsidianSearch<cr>", desc = "Search" },
+      { "<leader>or", "<cmd>ObsidianRename<cr>", desc = "Rename" },
+      { "<leader>of", "<cmd>ObsidianQuickSwitch<cr>", desc = "Find" },
+      { "<leader>og", "<cmd>ObsidianTags<cr>", desc = "Tags" },
+      { "<leader>ow", "<cmd>ObsidianWorkspace personal<cr>", desc = "Personal workspace" },
+      { "<leader>oa", "<cmd>ObsidianOpen<cr>", desc = "Open in app" },
     },
     opts = {
       workspaces = {
@@ -46,7 +46,7 @@ return {
       -- see below for full list of options 👇
       daily_notes = {
         -- Optional, if you keep daily notes in a separate directory.
-        folder = "Journal/Daily",
+        folder = "Journal/Daily/2025",
         -- Optional, if you want to change the date format for the ID of daily notes.
         date_format = "%Y-%m-%d",
         -- Optional, if you want to change the date format of the default alias of daily notes.
@@ -136,7 +136,7 @@ return {
     optional = true,
     opts = {
       spec = {
-        { "<leader>n", group = "obsidian", icon = "" },
+        { "<leader>o", group = "obsidian", icon = "" },
       },
     },
   },
