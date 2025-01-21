@@ -6,73 +6,74 @@ if vim.g.vscode then -- use vscode keymaps instead
   return
 end
 
--- keymap function
-local function map(mode, lhs, rhs, opts)
-  opts = opts or {}
-  opts.silent = opts.silent ~= false
-  opts.noremap = opts.noremap ~= false
-  vim.keymap.set(mode, lhs, rhs, opts)
-end
-
 -- Quit
-map({ "n" }, "<C-q>", "<cmd>qa<cr>", { desc = "Quit all" })
+K.map("<C-q>", "<cmd>qa<cr>", { desc = "Quit all" })
 
 -- Better Search navigation
-map("n", "n", "nzz")
-map("n", "N", "Nzz")
-map("n", "*", "*zz")
-map("n", "#", "#zz")
-map("n", "g*", "g*zz")
-map("n", "g#", "g#zz")
+K.map("n", "nzz")
+K.map("N", "Nzz")
+K.map("*", "*zz")
+K.map("#", "#zz")
+K.map("g*", "g*zz")
+K.map("g#", "g#zz")
 
 -- Press jk fast to enter normal mode
-map("i", "jk", "<ESC>")
+K.map("jk", "<ESC>", { mode = "i" })
 
 -- inset empty blank line above/below
-map("n", "<leader>o", "m`o<esc>``", { desc = "Insert blank line above" })
-map("n", "<leader>O", "m`O<esc>``", { desc = "Insert blank line below" })
+K.map("<C-CR>", "m`o<esc>``", { mode = "n", desc = "Insert new line above" })
+K.map("<S-CR>", "m`O<esc>``", { mode = "n", desc = "Insert new line below" })
+K.map("<C-CR>", "<esc>m`o<esc>``gi", { mode = "i", desc = "Insert new line above" })
+K.map("<S-CR>", "<esc>m`O<esc>``gi", { mode = "i", desc = "Insert new line below" })
+
+K.map("<A-d>", [[m`"yyy"yp``j]], { mode = "n", desc = "Duplicate line" })
+K.map("<A-d>", [[<Esc>"yyy"ypgi]], { mode = "i", desc = "Duplicate line" })
+K.map("<A-d>", [["yy'>"ypgv]], { mode = "v", desc = "Duplicate selection" })
 
 -- select all
-map({ "i", "n", "v" }, "<C-a>", "<esc>ggVG")
+K.map("<C-a>", "<esc>ggVG", { mode = { "i", "n", "v" } })
 
 -- Move to start/end of line
-map({ "n", "x" }, "H", "^")
-map({ "n", "x" }, "L", "$")
+K.map("H", "^", { mode = { "n", "x" } })
+K.map("L", "$", { mode = { "n", "x" } })
 
 -- Delete word with backspace
-map("i", "<C-BS>", "<C-w>")
-map("i", "<C-Del>", "<esc>cw")
+K.map("<C-BS>", "<C-w>", { mode = "i" })
+K.map("<C-Del>", "<esc>cw", { mode = "i" })
 
-map("n", "<cr>", "ciw", { desc = "Change word under cursor" })
-map("n", "gl", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+K.map("<CR>", [["xciw]], { mode = "n", desc = "Change inner word" })
+K.map("<CR>", [["xc]], { mode = "v", desc = "Change selection" })
+
+K.map("gl", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 
 -- windows
-map("n", "<leader>wq", "<C-W>c", { desc = "Delete Window", remap = true })
-map("n", "<leader>ws", "<C-W>s", { desc = "Split Window Below", remap = true })
-map("n", "<leader>wv", "<C-W>v", { desc = "Split Window Right", remap = true })
+K.map("<leader>wq", "<C-W>c", { desc = "Delete Window", remap = true })
+K.map("<leader>ws", "<C-W>s", { desc = "Split Window Below", remap = true })
+K.map("<leader>wv", "<C-W>v", { desc = "Split Window Right", remap = true })
 
 -- Buffers
-map("n", "Q", function()
+K.map("Q", function()
   Snacks.bufdelete()
 end, { desc = "Delete Buffer" })
 
 -- tabs
-map("n", "<leader><tab>q", "<cmd>tabclose<cr>", { desc = "Close Tab" })
-map("n", "]<tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
-map("n", "[<tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+K.map("<leader><tab>q", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+K.map("]<tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+K.map("[<tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 -- Comment
-vim.keymap.del("n", "<c-/>") -- Remove terminal keybind
-map("n", "<c-/>", "gcc", { desc = "comment toggle", remap = true })
-map("v", "<c-/>", "gc", { desc = "comment toggle", remap = true })
+K.map("<c-/>", "<Nop>") -- Remove terminal keybind set by lazyvim
+
+K.map("<c-/>", "gcc", { mode = "n", desc = "comment toggle", remap = true })
+K.map("<c-/>", "gc", { mode = "v", desc = "comment toggle", remap = true })
 
 -- Terminal
 -- stylua: ignore
 local terminal = function() Snacks.terminal.toggle() end
-map({ "n", "t" }, "<c-\\>", terminal, { desc = "Terminal (Root Dir)" })
+K.map("<c-\\>", terminal, { mode = { "n", "t" }, desc = "Terminal (Root Dir)" })
 
 -- Google search
 local searching_google_in_visual =
   [[<ESC>gv"gy<ESC>:lua vim.fn.system({'xdg-open', 'https://google.com/search?q=' .. vim.fn.getreg('g')})<CR>]]
 
-vim.keymap.set("v", "gx", searching_google_in_visual, { silent = true, noremap = true })
+K.map("gx", searching_google_in_visual, { mode = "v", silent = true, noremap = true })
