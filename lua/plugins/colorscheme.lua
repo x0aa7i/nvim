@@ -38,7 +38,33 @@ return {
       H.SnacksIndent = { fg = C.bg_light } -- indent guide
       H.SatelliteBar = { bg = C.terminal_black } -- scrollbar
 
+      -- Custom checkbox highlights
       H.RenderMarkdownDash = { fg = C.terminal_black }
+      H.RenderMarkdownIncomplete = { fg = C.yellow } -- Incomplete tasks
+      H.RenderMarkdownCanceled = { fg = C.red } -- Canceled tasks
+      H.RenderMarkdownForwarded = { fg = C.blue } -- Forwarded tasks
+      H.RenderMarkdownSchedule = { fg = C.magenta } -- Scheduled tasks
+
+      H.RenderMarkdownInfo = { fg = C.cyan } -- Info
+      H.RenderMarkdownIdea = { fg = C.yelow } -- Idea
+      H.RenderMarkdownImportant = { fg = C.red } -- Important
+      H.RenderMarkdownQuestion = { fg = C.yellow } -- Question
+      H.RenderMarkdownPros = { fg = C.green } -- Pros
+      H.RenderMarkdownCons = { fg = C.red } -- Cons
+
+      H.RenderMarkdownFire = { fg = C.orange } -- Fire
+      H.RenderMarkdownStar = { fg = C.yellow } -- Star
+      H.RenderMarkdownBookmark = { fg = C.purple } -- Bookmark
+      H.RenderMarkdownTrendUp = { fg = C.green } -- Trend Up
+      H.RenderMarkdownTrendDown = { fg = C.red } -- Trend Down
+      H.RenderMarkdownWin = { fg = C.green } -- Win
+
+      H.RenderMarkdownKey = { fg = C.yellow } -- Key
+      H.RenderMarkdownQuote = { fg = C.cyan } -- Quote
+      H.RenderMarkdownMoney = { fg = C.green } -- Money
+      H.RenderMarkdownLocation = { fg = C.blue } -- Location
+      H.RenderMarkdownNew = { fg = C.green } -- New
+      H.RenderMarkdownProgress = { fg = C.green } -- Progress
     end
   end,
 }

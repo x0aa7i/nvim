@@ -115,20 +115,7 @@ return {
         },
       },
 
-      ui = {
-        enable = false, -- Handeled by markdown.nvim
-        checkboxes = {
-          -- NOTE: the 'char' value has to be a single character, and the highlight groups are defined below.
-          [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
-          ["x"] = { char = "", hl_group = "ObsidianDone" },
-          [">"] = { char = "", hl_group = "ObsidianRightArrow" },
-          ["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
-
-          ["%-"] = { char = "󰛲", hl_group = "Comment" },
-          ["!"] = { char = "󰩳", hl_group = "Error" },
-          ["%?"] = { char = "󰞋", hl_group = "Added" },
-        },
-      },
+      ui = { enable = false }, -- Handeled by render-markdown.nvim
     },
   },
   {
