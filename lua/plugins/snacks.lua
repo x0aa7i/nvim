@@ -38,5 +38,25 @@ return {
       },
       refresh = 50, -- refresh at most every 50ms
     },
+    picker = {
+      formatters = {
+        file = {
+          filename_first = true, -- display filename before the file path
+        },
+      },
+      win = {
+        input = {
+          keys = {
+            -- close the picker on ESC instead
+            ["<Esc>"] = { "close", mode = { "n", "i" } },
+          },
+        },
+      },
+    },
+  },
+  keys = {
+    -- stylua: ignore
+    { "<leader><space>", function() Snacks.picker.smart() end, desc = "Find Files (Root Dir)" },
+    { "<leader>gd", false }, -- used by diffview
   },
 }

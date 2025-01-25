@@ -1,6 +1,7 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
+    enabled = false,
     dependencies = {
       -- "debugloop/telescope-undo.nvim",
       -- "nvim-lua/plenary.nvim", -- telescope undo dependency
