@@ -38,8 +38,9 @@ return {
       H.SnacksIndent = { fg = C.bg_light } -- indent guide
       H.SatelliteBar = { bg = C.terminal_black } -- scrollbar
 
-      -- Custom checkbox highlights
       H.RenderMarkdownDash = { fg = C.terminal_black }
+
+      -- Custom checkbox highlights
       H.RenderMarkdownIncomplete = { fg = C.yellow } -- Incomplete tasks
       H.RenderMarkdownCanceled = { fg = C.red } -- Canceled tasks
       H.RenderMarkdownForwarded = { fg = C.blue } -- Forwarded tasks

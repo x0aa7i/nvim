@@ -15,10 +15,9 @@ return {
       icons = {},
     },
     checkbox = {
+      unchecked = { icon = "󰄱 " },
+      checked = { icon = " " },
       custom = {
-        -- -- Define custom checkbox states
-        -- unchecked = { raw = "[ ]", rendered = "󰄱 ", highlight = "RenderMarkdownTodo", scope_highlight = nil },
-        -- complete = { raw = "[x]", rendered = " ", highlight = "RenderMarkdownComplete", scope_highlight = nil },
         incomplete = { raw = "[/]", rendered = "󰦖 ", highlight = "RenderMarkdownIncomplete", scope_highlight = nil },
         canceled = { raw = "[-]", rendered = "󰜺 ", highlight = "RenderMarkdownCanceled", scope_highlight = nil },
         forwarded = { raw = "[>]", rendered = " ", highlight = "RenderMarkdownForwarded", scope_highlight = nil },
