@@ -1,27 +1,19 @@
-local header = [[
-███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
-████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
-██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
-██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
-██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
-╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
-]]
-
 return {
   "folke/snacks.nvim",
   opts = {
     dashboard = {
       preset = {
-        header = header,
+        header = require("utils.logos").sharp,
       },
     },
     indent = {
       enabled = true,
       indent = {
         char = "┊",
+        only_current = true,
       },
       scope = {
-        enabled = true,
+        only_current = true,
       },
       animate = {
         enabled = false,
@@ -34,8 +26,8 @@ return {
     },
     statuscolumn = {
       enabled = true,
-      left = { "git", "mark" }, -- priority of signs on the left (high to low)
-      right = { "sign", "fold" }, -- priority of signs on the right (high to low)
+      left = { "mark", "sign" }, -- priority of signs on the left (high to low)
+      right = { "fold", "git" }, -- priority of signs on the right (high to low)
       folds = {
         open = true, -- show open fold icons
         git_hl = true, -- use Git Signs hl for fold icons
