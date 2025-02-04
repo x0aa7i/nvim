@@ -23,3 +23,5 @@ vim.opt.listchars:append({
   extends = "…",
   precedes = "…",
 })
+
+vim.filetype.add({ pattern = { [".*/tmux.*.conf"] = "tmux" } })
