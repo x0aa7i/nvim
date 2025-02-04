@@ -1,6 +1,9 @@
 return {
   "catgoose/nvim-colorizer.lua",
   event = "BufReadPre",
+  keys = {
+    { "<leader>uH", "<CMD>ColorizerToggle<CR>", desc = "Toggle Colorizer highlights" },
+  },
   opts = {
     filetypes = {
       "css",
@@ -11,6 +14,9 @@ return {
       "typescript",
       "lua",
       "json",
+      "yaml",
+      "toml",
+      "tmux",
       cmp_docs = {
         always_update = true,
       },
