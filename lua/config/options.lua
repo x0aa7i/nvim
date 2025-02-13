@@ -8,6 +8,18 @@ vim.opt.breakindentopt = "list:-1"
 
 vim.opt.pumblend = 0 -- make popup menu transparent, value range [0,100]
 
+-- vim.g.clipboard = {
+--   name = "OSC 52",
+--   copy = {
+--     ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+--     ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+--   },
+--   paste = {
+--     ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+--     ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+--   },
+-- }
+
 -- fold
 vim.o.foldcolumn = "auto"
 vim.o.foldlevel = 99
@@ -25,3 +37,7 @@ vim.opt.listchars:append({
 })
 
 vim.filetype.add({ pattern = { [".*/tmux.*.conf"] = "tmux" } })
+vim.filetype.add({ extension = { vert = "glsl" } })
+vim.filetype.add({ extension = { frag = "glsl" } })
+vim.filetype.add({ extension = { glsl = "glsl" } })
+vim.filetype.add({ extension = { wgsl = "glsl" } })

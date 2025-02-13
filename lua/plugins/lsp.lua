@@ -138,6 +138,7 @@ return {
         "emmet-language-server", -- css/html completions
         "lua-language-server",
         "taplo", -- toml lsp
+        "glsl_analyzer", -- glsl lsp
       },
     },
   },
