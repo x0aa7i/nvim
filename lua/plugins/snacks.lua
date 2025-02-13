@@ -55,8 +55,13 @@ return {
     },
   },
   keys = {
-    -- stylua: ignore
-    { "<leader><space>", function() Snacks.picker.smart() end, desc = "Find Files (Root Dir)" },
+    {
+      "<leader><space>",
+      function()
+        Snacks.picker.smart({ multi = { "buffers", "files" } })
+      end,
+      desc = "Find Files (Root Dir)",
+    },
     { "<leader>gd", false }, -- used by diffview
   },
 }
