@@ -13,7 +13,8 @@ local base_configs = {
 
 local groq_configs = {
   model = "llama-3.3-70b-versatile",
-  body = { max_tokens = nil, temperature = 0.8, top_p = 1, stop = nil },
+  -- model = "deepseek-r1-distill-llama-70b",
+  body = { max_tokens = 4096, temperature = 0.8, top_p = 0.95, stop = nil },
   command = function()
     local api_endpoint = "https://api.groq.com/openai/v1/chat/completions"
     local api_key = os.getenv("GROQ_API_KEY")
@@ -44,24 +45,41 @@ local ollama_configs = {
 return {
   "David-Kunz/gen.nvim",
   cmd = { "Gen" },
+  dependencies = {
+    {
+      "folke/which-key.nvim",
+      optional = true,
+      opts = {
+        spec = {
+          {
+            mode = { "n", "v" },
+            { "<leader>a", group = "+ai" },
+            { "<leader>at", group = "+Gen text" },
+            { "<leader>ac", group = "+Gen code" },
+          },
+        },
+      },
+    },
+  },
   keys = {
     { "<leader>ag", ":Gen Generate_Input<cr>", mode = "n", desc = "Generate from Input" },
     { "<leader>ag", ":Gen Generate_Selection<cr>", mode = "v", desc = "Generate from Selection" },
 
     -- Text-related shortcuts
-    { "<leader>ax", ":Gen Ask<cr>", mode = "v", desc = "Ask About Text" },
-    { "<leader>ar", ":Gen Rewrite<cr>", mode = "v", desc = "Rewrite Text" },
-    { "<leader>as", ":Gen Make_Concise<cr>", mode = "v", desc = "Make Text Concise" },
-    { "<leader>az", ":Gen Summarize<cr>", mode = "v", desc = "Summarize Text" },
-    { "<leader>aw", ":Gen Enhance_Grammar_Spelling<cr>", mode = "v", desc = "Enhance Grammar and Spelling" },
+    { "<leader>ata", ":Gen Ask<cr>", mode = "v", desc = "Ask About Text" },
+    { "<leader>atr", ":Gen Rewrite<cr>", mode = "v", desc = "Rewrite Text" },
+    { "<leader>atc", ":Gen Make_Concise<cr>", mode = "v", desc = "Make Text Concise" },
+    { "<leader>ats", ":Gen Summarize<cr>", mode = "v", desc = "Summarize Text" },
+    { "<leader>ate", ":Gen Enhance_Grammar_Spelling<cr>", mode = "v", desc = "Enhance Grammar and Spelling" },
+    { "<leader>atj", ":Gen Journal_Note<cr>", mode = "v", desc = "Rewrite Journal Note" },
 
     -- Code-related shortcuts
-    { "<leader>ac", ":Gen Ask_Code<cr>", mode = "v", desc = "Ask About Code" },
-    { "<leader>ah", ":Gen Enhance_Code<cr>", mode = "v", desc = "Enhance Code" },
-    { "<leader>ad", ":Gen JSDoc<cr>", mode = "v", desc = "Write JSDoc" },
-    { "<leader>af", ":Gen Fix_Code<cr>", mode = "v", desc = "Fix Code" },
-    { "<leader>an", ":Gen Change_Code<cr>", mode = "v", desc = "Change Code" },
-    { "<leader>at", ":Gen Write_Tests<cr>", mode = "v", desc = "Write Tests" },
+    { "<leader>aca", ":Gen Ask_Code<cr>", mode = "v", desc = "Ask About Code" },
+    { "<leader>ace", ":Gen Enhance_Code<cr>", mode = "v", desc = "Enhance Code" },
+    { "<leader>acd", ":Gen JSDoc<cr>", mode = "v", desc = "Write JSDoc" },
+    { "<leader>acf", ":Gen Fix_Code<cr>", mode = "v", desc = "Fix Code" },
+    { "<leader>acn", ":Gen Change_Code<cr>", mode = "v", desc = "Change Code" },
+    { "<leader>act", ":Gen Write_Tests<cr>", mode = "v", desc = "Write Tests" },
   },
   config = function()
     local gen = require("gen")
@@ -83,6 +101,9 @@ return {
       Make_Concise = {
         prompt = "Condense the following text to its essential points, maintaining clarity. Output only the concise version without quotes:\n$text",
         replace = true,
+      },
+      Journal_Note = {
+        prompt = "Rewrite the following journal note to improve clarity, flow, and readability. Keep the style conversational and informal:\n$text",
       },
       Enhance_Code = {
         prompt = "Optimize and improve the following code. Consider performance, readability, and best practices. Output only the enhanced code in the format ```$filetype\n...\n```:\n```$filetype\n$text\n```",

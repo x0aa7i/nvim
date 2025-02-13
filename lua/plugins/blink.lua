@@ -44,19 +44,12 @@ return {
     },
     sources = {
       compat = {
-        "codeium",
         "markdown",
         "obsidian",
         "obsidian_new",
         "obsidian_tags",
       },
       providers = {
-        codeium = {
-          kind = "Codeium",
-          score_offset = 100,
-          async = true,
-          max_items = 3,
-        },
         markdown = {
           name = "RenderMarkdown",
           module = "render-markdown.integ.blink",
