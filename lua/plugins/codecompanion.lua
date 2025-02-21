@@ -1,3 +1,15 @@
+local function slash_commands()
+  local commands = {}
+  for _, command in ipairs({ "buffer", "file", "help", "symbols" }) do
+    commands[command] = {
+      opts = {
+        provider = LazyVim.pick.picker.name,
+      },
+    }
+  end
+  return commands
+end
+
 return {
   {
     "folke/which-key.nvim",
@@ -10,10 +22,11 @@ return {
   },
   {
     "saghen/blink.cmp",
-    lazy = false,
+    event = "InsertEnter",
+    optional = true,
     opts = {
       sources = {
-        default = { "lsp", "path", "snippets", "buffer", "codecompanion" },
+        compat = { "codecompanion" },
         providers = {
           codecompanion = {
             name = "CodeCompanion",
@@ -21,11 +34,7 @@ return {
             enabled = true,
           },
         },
-        cmdline = {}, -- Disable sources for command-line mode
       },
-    },
-    opts_extend = {
-      "sources.default",
     },
   },
   {
@@ -64,28 +73,11 @@ return {
       strategies = {
         chat = {
           adapter = "groq",
-          slash_commands = {
-            ["file"] = {
-              callback = "strategies.chat.slash_commands.file",
-              description = "Select a file with Snacks",
-              opts = {
-                provider = "snacks",
-              },
-            },
-            ["buffer"] = {
-              opts = {
-                provider = "snacks",
-              },
-            },
-            ["help"] = {
-              opts = {
-                provider = "snacks",
-              },
-            },
-            ["symbols"] = {
-              opts = {
-                provider = "snacks",
-              },
+          slash_commands = slash_commands(),
+          keymaps = {
+            close = {
+              modes = { n = "q", i = "<C-c>" },
+              description = "Close Chat",
             },
           },
         },
@@ -97,60 +89,5 @@ return {
         },
       },
     },
-  },
-  {
-    "nvim-lualine/lualine.nvim",
-    opts = function(_, opts)
-      local Spinner = require("lualine.component"):extend()
-      local spinner_symbols = {
-        "⠋",
-        "⠙",
-        "⠹",
-        "⠸",
-        "⠼",
-        "⠴",
-        "⠦",
-        "⠧",
-        "⠇",
-        "⠏",
-      }
-
-      -- Initializer
-      function Spinner:init(options)
-        Spinner.super.init(self, options)
-        self.spinner_index = 1
-
-        local group = vim.api.nvim_create_augroup("CodeCompanionHooks", {})
-
-        vim.api.nvim_create_autocmd({ "User" }, {
-          pattern = "CodeCompanionRequest*",
-          group = group,
-          callback = function(request)
-            if request.match == "CodeCompanionRequestStarted" then
-              self.processing = true
-            elseif request.match == "CodeCompanionRequestFinished" then
-              self.processing = false
-            end
-          end,
-        })
-      end
-
-      -- Function that runs every time statusline is updated
-      function Spinner:update_status()
-        if self.processing then
-          self.spinner_index = (self.spinner_index % #spinner_symbols) + 1
-          return "󰚩 " .. spinner_symbols[self.spinner_index]
-        else
-          return nil
-        end
-      end
-
-      opts.sections = opts.sections or {}
-      opts.sections.lualine_y = vim.list_extend(opts.sections.lualine_y or {}, {
-        { Spinner },
-      })
-
-      return opts
-    end,
   },
 }
