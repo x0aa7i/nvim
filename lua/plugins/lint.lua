@@ -1,4 +1,5 @@
 local eslint = require("lint").get_namespace("eslint_d")
+
 vim.diagnostic.config({
   underline = true,
   virtual_text = false,
@@ -17,7 +18,12 @@ return {
     },
     linters = {
       ["markdownlint-cli2"] = {
-        args = { "--config", "~/.config/nvim/config/markdownlint.json" },
+        args = { "--config", vim.fn.stdpath("config") .. "/rules/.markdownlint.json" },
+      },
+      eslint_d = {
+        condition = function(ctx)
+          return vim.fs.find({ "eslint.config.js" }, { path = ctx.filename, upward = true })[1]
+        end,
       },
     },
   },

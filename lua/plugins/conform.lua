@@ -19,6 +19,21 @@ return {
           return #diag > 0
         end,
       },
+      dprint = {
+        prepend_args = function(self, ctx)
+          local has_dprint = self.cwd(self, ctx)
+          if not has_dprint then
+            return { "-c", vim.fn.stdpath("config") .. "/rules/dprint.json" }
+          end
+          return {}
+        end,
+      },
+      prettierd = {
+        require_cwd = false,
+        env = {
+          PRETTIERD_DEFAULT_CONFIG = vim.fn.stdpath("config") .. "/rules/.prettierrc.json",
+        },
+      },
     },
     formatters_by_ft = {
       ["css"] = { "prettierd" },
@@ -36,7 +51,7 @@ return {
       ["json"] = { "prettierd" },
       ["jsonc"] = { "prettierd" },
 
-      ["markdown"] = { "prettierd", "markdownlint-cli2", "markdown-toc" },
+      ["markdown"] = { "dprint", "markdownlint-cli2", "markdown-toc" },
       ["markdown.mdx"] = { "prettierd", "markdownlint-cli2", "markdown-toc" },
 
       ["yaml"] = { "prettierd" },
