@@ -1,5 +1,11 @@
 return {
   {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "tokyonight",
+    },
+  },
+  {
     "catppuccin/nvim",
     enabled = false,
   },
@@ -72,6 +78,33 @@ return {
         H.RenderMarkdownLocation = { fg = C.blue } -- Location
         H.RenderMarkdownNew = { fg = C.green } -- New
         H.RenderMarkdownProgress = { fg = C.green } -- Progress
+
+        -- darker bg_float variants
+        local bg_float2 = "#14151f"
+        local bg_float3 = "#0e0e14"
+
+        -- Telescope
+        H.TelescopeNormal = { fg = C.fg, bg = bg_float2 }
+        H.TelescopeTitle = { fg = bg_float2, bg = C.blue }
+        H.TelescopeBorder = { fg = bg_float2, bg = bg_float2 }
+        H.TelescopePromptNormal = { fg = C.fg, bg = C.bg_float }
+        H.TelescopePromptTitle = { fg = C.bg_float, bg = C.orange }
+        H.TelescopePromptBorder = { fg = C.bg_float, bg = C.bg_float }
+        H.TelescopePreviewNormal = { fg = C.fg, bg = bg_float3 }
+        H.TelescopePreviewBorder = { fg = bg_float3, bg = bg_float3 }
+
+        -- Snacks.picker
+        H.SnacksPicker = { fg = C.fg, bg = bg_float2 }
+        H.SnacksPickerTitle = { fg = bg_float2, bg = C.blue }
+        H.SnacksPickerBorder = { fg = bg_float2, bg = bg_float2 }
+        H.SnacksPickerInput = { fg = C.fg, bg = C.bg_float }
+        H.SnacksPickerInputTitle = { fg = C.bg_float, bg = C.orange }
+        H.SnacksPickerInputBorder = { fg = C.bg_float, bg = C.bg_float }
+        H.SnacksPickerPreview = { fg = C.fg, bg = bg_float3 }
+        H.SnacksPickerPreviewBorder = { fg = bg_float3, bg = bg_float3 }
+
+        -- Folds
+        H.Folded = { fg = C.blue, bg = C.bg_light }
       end
     end,
   },
