@@ -31,7 +31,7 @@ K.map("<A-d>", [[<Esc>"yyy"ypgi]], { mode = "i", desc = "Duplicate line" })
 K.map("<A-d>", [["yy'>"ypgv]], { mode = "v", desc = "Duplicate selection" })
 
 -- select all
-K.map("<C-a>", "<esc>ggVG", { mode = { "i", "n", "v" } })
+K.map("<C-S-a>", "<esc>ggVG", { mode = { "i", "n", "v" } })
 
 -- Move to start/end of line
 K.map("H", "^", { mode = { "n", "x" } })
@@ -45,6 +45,13 @@ K.map("<CR>", [["xciw]], { mode = "n", desc = "Change inner word" })
 K.map("<CR>", [["xc]], { mode = "v", desc = "Change selection" })
 
 K.map("gl", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+
+-- Folds
+K.map("z1", "<cmd> setlocal foldlevel=0<cr>", { mode = "n", desc = "Fold Level 1" })
+K.map("z2", "<cmd> setlocal foldlevel=1<cr>", { mode = "n", desc = "Fold Level 2" })
+K.map("z3", "<cmd> setlocal foldlevel=2<cr>", { mode = "n", desc = "Fold Level 3" })
+K.map("z4", "<cmd> setlocal foldlevel=3<cr>", { mode = "n", desc = "Fold Level 4" })
+K.map("z5", "<cmd> setlocal foldlevel=4<cr>", { mode = "n", desc = "Fold Level 5" })
 
 -- windows
 K.map("<leader>wq", "<C-W>c", { desc = "Delete Window", remap = true })
@@ -66,6 +73,10 @@ K.map("<c-/>", "<Nop>") -- Remove terminal keybind set by lazyvim
 
 K.map("<c-/>", "gcc", { mode = "n", desc = "comment toggle", remap = true })
 K.map("<c-/>", "gc", { mode = "v", desc = "comment toggle", remap = true })
+
+K.map("<c-_>", "gcc", { mode = "n", desc = "comment toggle", remap = true })
+K.map("<c-_>", "gc", { mode = "v", desc = "comment toggle", remap = true })
+
 
 -- Terminal
 -- stylua: ignore
