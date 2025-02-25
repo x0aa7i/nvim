@@ -5,6 +5,7 @@ return {
     "epwalsh/obsidian.nvim",
     version = "*", -- recommended, use latest release instead of latest commit
     lazy = true,
+    enabled = false,
     ft = "markdown",
     -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
     event = {
@@ -31,7 +32,7 @@ return {
       { "<leader>of", "<cmd>ObsidianQuickSwitch<cr>", desc = "Find" },
       { "<leader>og", "<cmd>ObsidianTags<cr>", desc = "Tags" },
       { "<leader>ow", "<cmd>ObsidianWorkspace personal<cr>", desc = "Personal workspace" },
-      { "<leader>oa", "<cmd>ObsidianOpen<cr>", desc = "Open in app" },
+      { "<leader>oo", "<cmd>ObsidianOpen<cr>", desc = "Open in app" },
     },
     opts = {
       workspaces = {
@@ -41,7 +42,10 @@ return {
         },
       },
       completion = {
-        nvim_cmp = true,
+        nvim_cmp = false,
+      },
+      ui = {
+        enable = false,
       },
       -- see below for full list of options 👇
       daily_notes = {
@@ -71,7 +75,7 @@ return {
       },
 
       highlight = {
-        enable = true,
+        enable = false,
         additional_vim_regex_highlighting = { "markdown" },
       },
 
@@ -114,8 +118,6 @@ return {
           opts = { buffer = true, desc = "Toggle checkbox" },
         },
       },
-
-      ui = { enable = false }, -- Handeled by render-markdown.nvim
     },
   },
   {

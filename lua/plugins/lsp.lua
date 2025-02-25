@@ -28,30 +28,30 @@ end
 
 return {
   {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      {
-        "dmmulroy/tsc.nvim",
-        opts = {
-          auto_start_watch_mode = false,
-          use_trouble_qflist = true,
-          flags = {
-            watch = false,
-          },
-        },
-        keys = {
-          { "<leader>ct", ft = ts_filetypes, "<cmd>TSC<cr>", desc = "Type Check" },
-          { "<leader>xy", ft = ts_filetypes, "<cmd>TSCOpen<cr>", desc = "Type Check Quickfix" },
-        },
-        ft = ts_filetypes,
-        cmd = {
-          "TSC",
-          "TSCOpen",
-          "TSCClose",
-          "TSStop",
-        },
+    "dmmulroy/tsc.nvim",
+    event = "VeryLazy",
+    dependencies = { "neovim/nvim-lspconfig" },
+    keys = {
+      { "<leader>ct", ft = ts_filetypes, "<cmd>TSC<cr>", desc = "Type Check" },
+      { "<leader>xy", ft = ts_filetypes, "<cmd>TSCOpen<cr>", desc = "Type Check Quickfix" },
+    },
+    opts = {
+      auto_start_watch_mode = false,
+      use_trouble_qflist = true,
+      flags = {
+        watch = false,
       },
     },
+    ft = ts_filetypes,
+    cmd = {
+      "TSC",
+      "TSCOpen",
+      "TSCClose",
+      "TSStop",
+    },
+  },
+  {
+    "neovim/nvim-lspconfig",
     opts = function(_, opts)
       -- Inlay hints
       opts.inlay_hints = opts.inlay_hints or {}
@@ -130,9 +130,6 @@ return {
         "tailwindcss-language-server",
         "css-lsp",
         "json-lsp",
-        "markdownlint-cli2", -- markdown linter
-        "markdown-toc", -- markdown table of contents
-        "marksman", -- markdown lsp
         "harper-ls", -- grammar check
         "stylelint-lsp", -- css linter
         "emmet-language-server", -- css/html completions

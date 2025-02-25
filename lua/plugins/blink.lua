@@ -56,23 +56,5 @@ return {
       },
       ghost_text = { enabled = false },
     },
-    sources = {
-      compat = {
-        "markdown",
-        "obsidian",
-        "obsidian_new",
-        "obsidian_tags",
-      },
-      providers = {
-        markdown = {
-          name = "RenderMarkdown",
-          module = "render-markdown.integ.blink",
-          fallbacks = { "lsp" },
-        },
-        obsidian = { name = "obsidian", module = "blink.compat.source" },
-        obsidian_new = { name = "obsidian_new", module = "blink.compat.source" },
-        obsidian_tags = { name = "obsidian_tags", module = "blink.compat.source" },
-      },
-    },
   },
 }
