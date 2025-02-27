@@ -24,12 +24,18 @@ return {
         },
       },
     },
+    image = {
+      enabled = true,
+      math = {
+        enabled = false,
+      },
+    },
     statuscolumn = {
       enabled = true,
       left = { "mark", "sign" }, -- priority of signs on the left (high to low)
       right = { "fold", "git" }, -- priority of signs on the right (high to low)
       folds = {
-        open = true, -- show open fold icons
+        open = false, -- show open fold icons
         git_hl = true, -- use Git Signs hl for fold icons
       },
       git = {
@@ -50,6 +56,16 @@ return {
             -- close the picker on ESC instead
             ["<Esc>"] = { "close", mode = { "n", "i" } },
           },
+        },
+      },
+    },
+    zen = {
+      toggles = {
+        dim = false,
+      },
+      win = {
+        backdrop = {
+          transparent = false,
         },
       },
     },
