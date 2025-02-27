@@ -31,8 +31,8 @@ return {
       ["less"] = { "prettierd" },
       ["scss"] = { "prettierd" },
 
-      ["json"] = { "dprint" },
-      ["jsonc"] = { "dprint" },
+      ["json"] = { "prettierd" },
+      ["jsonc"] = { "prettierd" },
 
       ["yaml"] = { "prettierd" },
     },
