@@ -1,3 +1,26 @@
+vim.filetype.add({ extension = { mdx = "markdown.mdx" } })
+vim.filetype.add({ extension = { svx = "markdown.svx" } })
+
+--Retrieves an LSP client by name
+---@param name string
+---@return vim.lsp.Client | nil
+local function getLSPClient(name)
+  return vim.lsp.get_clients({ bufnr = 0, name = name })[1]
+end
+
+---Toggles an LSP client by name
+---@param name string
+---@return nil
+local function toggleLSPClient(name)
+  local client = getLSPClient(name)
+  if client then
+    ---@diagnostic disable-next-line: param-type-mismatch
+    client.stop(true)
+  else
+    vim.cmd("LspStart " .. name)
+  end
+end
+
 return {
   {
     "folke/which-key.nvim",
@@ -19,6 +42,7 @@ return {
         "markdownlint-cli2", -- markdown linter
         "markdown-toc", -- markdown table of contents
         -- "marksman", -- markdown lsp
+        "harper-ls", -- grammar checker
       },
     },
   },
@@ -27,6 +51,42 @@ return {
     opts = {
       servers = {
         markdown_oxide = { capabilities = { workspace = { didChangeWatchedFiles = { dynamicRegistration = true } } } },
+        -- The hover window configuration for the diagnostics is done in
+        -- ~/github/dotfiles-latest/neovim/neobean/lua/config/autocmds.lua
+        harper_ls = {
+          autostart = true,
+          enabled = true,
+          filetypes = { "markdown" },
+          settings = {
+            ["harper-ls"] = {
+              userDictPath = vim.fn.stdpath("config") .. "/spell/en.utf-8.add",
+              codeActions = { forceStable = true },
+              linters = {
+                -- ToDoHyphen = false,
+                -- SpellCheck = true,
+                SentenceCapitalization = false,
+                Spaces = false,
+              },
+              isolateEnglish = true,
+              markdown = {
+                IgnoreLinkTitle = true,
+              },
+            },
+          },
+        },
+      },
+      setup = {
+        harper_ls = function()
+          Snacks.toggle({
+            name = "Grammar Checker",
+            get = function()
+              return getLSPClient("harper_ls") ~= nil
+            end,
+            set = function()
+              toggleLSPClient("harper_ls")
+            end,
+          }):map("<leader>uk")
+        end,
       },
     },
   },
@@ -54,7 +114,20 @@ return {
       },
       formatters_by_ft = {
         ["markdown"] = { "dprint", "markdownlint-cli2", "markdown-toc" },
-        ["markdown.mdx"] = { "dprint", "markdownlint-cli2", "markdown-toc" },
+        ["mdx"] = { "prettierd", "markdownlint-cli2", "markdown-toc" },
+      },
+    },
+  },
+  {
+    "mfussenegger/nvim-lint",
+    opts = {
+      linters_by_ft = {
+        markdown = { "markdownlint-cli2" },
+      },
+      linters = {
+        ["markdownlint-cli2"] = {
+          args = { "--config", vim.fn.stdpath("config") .. "/rules/.markdownlint.json" },
+        },
       },
     },
   },
@@ -70,7 +143,7 @@ return {
         width = "block",
         right_pad = 2,
         left_pad = 2,
-        position = "left",
+        position = "right",
       },
       heading = {
         sign = false,

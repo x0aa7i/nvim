@@ -30,6 +30,7 @@ return {
     },
     completion = {
       menu = {
+        auto_show = true,
         draw = {
           align_to = "label",
           treesitter = { "lsp" },
@@ -43,18 +44,19 @@ return {
                 return require("colorful-menu").blink_components_highlight(ctx)
               end,
             },
-            kind_icon = {
-              text = function(ctx)
-                if require("blink.cmp.completion.windows.render.tailwind").get_hex_color(ctx.item) then
-                  return "󱓻"
-                end
-                return ctx.kind_icon .. ctx.icon_gap
-              end,
-            },
           },
         },
       },
       ghost_text = { enabled = false },
+    },
+    sources = {
+      providers = {
+        lsp = {
+          opts = {
+            tailwind_color_icon = "󱓻",
+          },
+        },
+      },
     },
   },
 }
