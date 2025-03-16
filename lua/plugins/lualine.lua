@@ -34,7 +34,8 @@ return {
       { "grapple" },
     }
 
-    table.insert(opts.sections.lualine_c, { "filesize", color = { fg = "#737aa2" } })
+    table.insert(opts.sections.lualine_c, { "filesize", color = { fg = "#737aa2" }, icon = "" })
+    table.insert(opts.sections.lualine_c, { "lsp_status", color = { fg = "#737aa2" } })
     table.insert(opts.sections.lualine_x, { total_lines, color = { fg = "#a9b1d6" } })
 
     opts.sections.lualine_y = {}
