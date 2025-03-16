@@ -1,4 +1,3 @@
-# 💤 LazyVim
+🚨 This repo has been archived! 🚨
 
-A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
-Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
+My Neovim configuration is now part of my dotfiles: [dotfiles repo link](https://github.com/x0aa7i/dotfiles)
