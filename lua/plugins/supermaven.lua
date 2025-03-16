@@ -2,6 +2,7 @@ return {
   {
     "supermaven-inc/supermaven-nvim",
     event = "InsertEnter",
+    enabled = true,
     build = ":SupermavenUseFree",
     opts = {
       keymaps = {

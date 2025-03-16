@@ -57,7 +57,8 @@ return {
             name = "groq",
             schema = {
               model = {
-                default = "llama-3.3-70b-versatile",
+                -- default = "llama-3.3-70b-versatile",
+                default = "qwen-2.5-coder-32b",
               },
               num_ctx = {
                 default = 131072,

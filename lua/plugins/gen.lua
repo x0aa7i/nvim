@@ -12,7 +12,8 @@ local base_configs = {
 }
 
 local groq_configs = {
-  model = "llama-3.3-70b-versatile",
+  model = "qwen-2.5-coder-32b",
+  -- model = "llama-3.3-70b-versatile",
   -- model = "deepseek-r1-distill-llama-70b",
   body = { max_tokens = 4096, temperature = 0.8, top_p = 0.95, stop = nil },
   command = function()
